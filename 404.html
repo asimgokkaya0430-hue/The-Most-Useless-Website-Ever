@@ -3,12 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
+    <title>404 - Absolutely Nothing Here</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
-<h1>404 - Page Not Found</h1>
-<p>The page you are looking for does not exist.</p>
+<header>
+    <h1>🥔 The Most Useless Website Ever</h1>
+</header>
+
+<main>
+
+<section class="hero">
+
+<h2>Error 404</h2>
+
+<h3>Congratulations!</h3>
+
+<p>
+You have successfully discovered a page that doesn't exist.
+</p>
+
+<p>
+Unfortunately...
+</p>
+
+<h2>There is absolutely nothing here.</h2>
+
+<p id="random404">
+Loading disappointment...
+</p>
+
+<br>
+
+<img src="images/potato.png" id="potato404" alt="Potato" width="180">
+
+<p>
+Click the potato if you want.
+<br>
+It won't help.
+</p>
+
+<br>
+
+<a href="index.html" class="button">
+🏠 Return Home
+</a>
+
+<button onclick="randomExcuse()">
+🤷 Why doesn't this page exist?
+</button>
+
+<button onclick="window.location.reload()">
+🔄 Try Again
+</button>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>
+Version 0.4 Beta
+</p>
+
+<p>
+© randomfakecompanythatdoesnotevenexistlol™
+</p>
+
+</footer>
+
+<script>
+
+const messages=[
+
+"The potato stole this page.",
+
+"It never existed.",
+
+"Maybe you typed the URL with your elbows.",
+
+"404 pages are people too.",
+
+"This page went on vacation.",
+
+"Have you tried turning reality off and on again?",
+
+"The ducks are hiding it.",
+
+"It escaped into another dimension.",
+
+"Even we don't know where it went.",
+
+"Error successfully generated."
+
+];
+
+document.getElementById("random404").innerHTML=
+messages[Math.floor(Math.random()*messages.length)];
+
+function randomExcuse(){
+
+const excuses=[
+
+"The hamster unplugged the server.",
+
+"The potato ate the page.",
+
+"We accidentally deleted absolutely nothing.",
+
+"The page became self-aware and left.",
+
+"The page is busy doing nothing.",
+
+"It was never here to begin with."
+
+];
+
+alert(excuses[Math.floor(Math.random()*excuses.length)]);
+
+}
+
+document.getElementById("potato404").onclick=function(){
+
+// Intentionally does nothing.
+
+};
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catch the Potato</title>
+
+<link rel="icon" href="favicon.ico">
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    margin-top:20px;
+}
+
+#score{
+    font-size:30px;
+}
+
+#timer{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+#potato{
+    width:120px;
+    position:absolute;
+    cursor:pointer;
+    display:none;
+    user-select:none;
+}
+
+button{
+
+    padding:15px 30px;
+    font-size:22px;
+    cursor:pointer;
+    border:none;
+    border-radius:12px;
+
+}
+
+#result{
+    margin-top:20px;
+    font-size:26px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🥔 Catch the Potato!</h1>
+
+<div id="score">Score: 0</div>
+<div id="timer">Time: 30</div>
+
+<button id="startBtn">Start Game</button>
+
+<div id="result"></div>
+
+<img src="images/potato.png" id="potato">
+
+<script>
+
+const potato=document.getElementById("potato");
+
+const scoreText=document.getElementById("score");
+
+const timerText=document.getElementById("timer");
+
+const result=document.getElementById("result");
+
+const startBtn=document.getElementById("startBtn");
+
+let score=0;
+
+let time=30;
+
+let gameRunning=false;
+
+let spawnLoop;
+
+let countdown;
+
+let highscore=localStorage.getItem("potatoHighscore") || 0;
+
+function spawnPotato(){
+
+let x=Math.random()*(window.innerWidth-130);
+
+let y=Math.random()*(window.innerHeight-130);
+
+potato.style.left=x+"px";
+
+potato.style.top=y+"px";
+
+potato.style.display="block";
+
+}
+
+potato.onclick=function(){
+
+if(!gameRunning)return;
+
+score++;
+
+scoreText.innerHTML="Score: "+score;
+
+spawnPotato();
+
+}
+
+startBtn.onclick=function(){
+
+score=0;
+
+time=30;
+
+gameRunning=true;
+
+result.innerHTML="";
+
+startBtn.style.display="none";
+
+scoreText.innerHTML="Score: 0";
+
+timerText.innerHTML="Time: 30";
+
+spawnPotato();
+
+spawnLoop=setInterval(spawnPotato,700);
+
+countdown=setInterval(()=>{
+
+time--;
+
+timerText.innerHTML="Time: "+time;
+
+if(time<=0){
+
+clearInterval(spawnLoop);
+
+clearInterval(countdown);
+
+potato.style.display="none";
+
+gameRunning=false;
+
+startBtn.style.display="inline-block";
+
+if(score>highscore){
+
+highscore=score;
+
+localStorage.setItem("potatoHighscore",score);
+
+result.innerHTML="🏆 NEW HIGHSCORE! "+score;
+
+}
+
+else{
+
+if(score<5)
+
+result.innerHTML="🥔 The potato escaped.";
+
+else if(score<15)
+
+result.innerHTML="🥔 Amateur Potato Catcher.";
+
+else if(score<30)
+
+result.innerHTML="🥔 Certified Potato Hunter.";
+
+else
+
+result.innerHTML="👑 You have become one with the potato.";
+
+}
+
+}
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>

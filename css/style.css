@@ -999,4 +999,33 @@ color:#b6b6c5;
 
 line-height:1.6;
 
+/* ===== Classic Theme ===== */
+
+body.classic-theme {
+    background: white !important;
+    color: black !important;
+    font-family: "Times New Roman", serif !important;
+}
+
+body.classic-theme header,
+body.classic-theme footer,
+body.classic-theme section,
+body.classic-theme .card {
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+}
+
+body.classic-theme a {
+    color: blue !important;
+    text-decoration: underline;
+}
+
+body.classic-theme button {
+    background: lightgray !important;
+    color: black !important;
+    border: 1px solid black !important;
+}
+
 }

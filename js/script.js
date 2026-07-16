@@ -10,6 +10,30 @@ Part 1
 ========================================
 */
 
+/*
+========================================
+
+Theme System
+
+========================================
+*/
+
+function applyTheme(){
+
+    const theme = localStorage.getItem("theme");
+
+    document.body.classList.remove("classic");
+
+    if(theme === "classic"){
+
+        document.body.classList.add("classic");
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", applyTheme);
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // -----------------------------
@@ -790,6 +814,25 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     }
+
+    // Theme Switcher
+function setTheme(theme) {
+    if (theme === "classic") {
+        document.body.classList.add("classic-theme");
+        localStorage.setItem("theme", "classic");
+    } else {
+        document.body.classList.remove("classic-theme");
+        localStorage.setItem("theme", "modern");
+    }
+}
+
+// Load saved theme
+window.addEventListener("load", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "classic") {
+        document.body.classList.add("classic-theme");
+    }
+});
 
     // =============================
     // Secret Loading

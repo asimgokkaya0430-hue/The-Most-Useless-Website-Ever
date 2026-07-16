@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themes</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+
+<header>
+    <h1>🎨 Themes</h1>
+</header>
+
+<main>
+
+<h2>Choose your level of uselessness.</h2>
+
+<div class="theme-card">
+
+<h3>Modern</h3>
+
+<p>The current version.</p>
+
+<button onclick="setTheme('modern')">
+Use Modern Theme
+</button>
+
+</div>
+
+<br>
+
+<div class="theme-card">
+
+<h3>Classic HTML</h3>
+
+<p>
+Experience the internet like it's 1998.
+</p>
+
+<button onclick="setTheme('classic')">
+Use Classic Theme
+</button>
+
+</div>
+
+<br>
+
+<a href="index.html">
+<button>⬅ Back</button>
+</a>
+
+</main>
+
+<script>
+
+function setTheme(theme){
+
+    localStorage.setItem("theme",theme);
+
+    alert("Theme changed! Refresh any open pages if they don't update immediately.");
+
+}
+
+</script>
+
+<script>
+function setTheme(theme){
+
+    localStorage.setItem("theme", theme);
+
+    location.href = "index.html";
+
+}
+</script>
+
+</body>
+</html>

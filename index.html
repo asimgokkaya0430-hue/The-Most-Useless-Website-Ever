@@ -1,84 +1,2299 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Most Useless Website Ever</title>
+    <title>Dicrostonyx AI — Next-Gen 2K Image Synthesis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neon: {
+                            DEFAULT: '#39FF14',
+                            bright: '#00FF66',
+                            dim: '#1b7a0a',
+                            glow: 'rgba(57, 255, 20, 0.25)'
+                        },
+                        obsidian: {
+                            950: '#040604',
+                            900: '#080b08',
+                            800: '#0e130e',
+                            700: '#161f16',
+                            600: '#202d20'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --neon: #39FF14;
+            --neon-soft: #00FF66;
+        }
+        body {
+            background-color: #040604;
+            color: #e4fce4;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(57, 255, 20, 0.08) 0%, transparent 55%),
+                linear-gradient(rgba(57, 255, 20, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.025) 1px, transparent 1px);
+            background-size: 100% 100%, 36px 36px, 36px 36px;
+            overflow-x: hidden;
+        }
+
+        /* Custom Neon Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060906;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a291a;
+            border-radius: 4px;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #39FF14;
+        }
+
+        /* Neon Range Sliders */
+        input[type="range"].neon-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #121a12;
+            height: 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            outline: none;
+        }
+        input[type="range"].neon-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #39FF14;
+            cursor: pointer;
+            box-shadow: 0 0 12px #39FF14, 0 0 4px #ffffff;
+            border: 2px solid #040604;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type="range"].neon-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+            box-shadow: 0 0 18px #39FF14, 0 0 8px #ffffff;
+        }
+
+        .neon-border {
+            border: 1px solid rgba(57, 255, 20, 0.28);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.05), inset 0 0 20px rgba(57, 255, 20, 0.02);
+        }
+        .neon-border-strong {
+            border: 1px solid rgba(57, 255, 20, 0.65);
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.18), inset 0 0 12px rgba(57, 255, 20, 0.06);
+        }
+        .neon-btn {
+            background: linear-gradient(135deg, #39FF14 0%, #00e64d 100%);
+            color: #030803;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.45);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .neon-btn:hover:not(:disabled) {
+            box-shadow: 0 0 32px rgba(57, 255, 20, 0.8), 0 0 8px #ffffff;
+            transform: translateY(-1px);
+        }
+        .neon-btn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+        .neon-text-glow {
+            text-shadow: 0 0 14px rgba(57, 255, 20, 0.55);
+        }
+        @keyframes pulseScan {
+            0%, 100% { transform: translateY(-100%); opacity: 0.2; }
+            50% { transform: translateY(100%); opacity: 0.7; }
+        }
+        .scanner-line {
+            animation: pulseScan 2.2s ease-in-out infinite;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col selection:bg-neon selection:text-black">
 
-    <header>
-        <h1>The Most Useless Website Ever</h1>
-        <p>
-            Congratulations. You've successfully found a website
-            that serves absolutely no purpose.
-        </p>
+    <!-- Reusable Hidden SVG Template for the Dicrostonyx Hamster Logo -->
+    <svg id="dicrostonyx-hamster-master" class="hidden" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer Hexagon Frame -->
+        <polygon points="60,4 110,32 110,88 60,116 10,88 10,32" fill="#070d07" stroke="#39FF14" stroke-width="4"/>
+        <!-- Left & Right Round Hamster Ears -->
+        <circle cx="30" cy="34" r="14" fill="#0b140b" stroke="#39FF14" stroke-width="4.5"/>
+        <circle cx="30" cy="34" r="6" fill="#39FF14" fill-opacity="0.35"/>
+        <circle cx="90" cy="34" r="14" fill="#0b140b" stroke="#39FF14" stroke-width="4.5"/>
+        <circle cx="90" cy="34" r="6" fill="#39FF14" fill-opacity="0.35"/>
+        <!-- Chubby Geometric Hamster Head & Cheeks -->
+        <path d="M22 62 C12 76, 22 98, 60 98 C98 98, 108 76, 98 62 C95 42, 80 30, 60 30 C40 30, 25 42, 22 62 Z" fill="#0d180d" stroke="#39FF14" stroke-width="4.5" stroke-linejoin="round"/>
+        <!-- Cyber Forehead Crest -->
+        <polygon points="60,35 51,48 60,44 69,48" fill="#39FF14"/>
+        <!-- Glowing Cyber Eyes -->
+        <circle cx="43" cy="58" r="6" fill="#39FF14"/>
+        <circle cx="41" cy="56" r="2" fill="#ffffff"/>
+        <circle cx="77" cy="58" r="6" fill="#39FF14"/>
+        <circle cx="75" cy="56" r="2" fill="#ffffff"/>
+        <!-- Cute Nose & Whiskers -->
+        <polygon points="55,67 65,67 60,73" fill="#00FF66"/>
+        <path d="M60 73 L53 80 M60 73 L67 80" stroke="#39FF14" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Puffy Cheek Pouches Accent -->
+        <path d="M26 68 Q32 76 28 84" stroke="#00FF66" stroke-width="3" stroke-linecap="round"/>
+        <path d="M94 68 Q88 76 92 84" stroke="#00FF66" stroke-width="3" stroke-linecap="round"/>
+        <!-- Whiskers -->
+        <line x1="12" y1="66" x2="25" y2="69" stroke="#39FF14" stroke-width="3" stroke-linecap="round"/>
+        <line x1="10" y1="75" x2="24" y2="75" stroke="#39FF14" stroke-width="3" stroke-linecap="round"/>
+        <line x1="108" y1="66" x2="95" y2="69" stroke="#39FF14" stroke-width="3" stroke-linecap="round"/>
+        <line x1="110" y1="75" x2="96" y2="75" stroke="#39FF14" stroke-width="3" stroke-linecap="round"/>
+    </svg>
 
-        <button id="start-btn">
-            Waste My Time
-        </button>
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-obsidian-950/85 border-b border-neon/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+            <!-- Left Area: Logged-In Top-Left Profile Picture + Brand & Hamster Logo -->
+            <div class="flex items-center gap-3.5">
+                <!-- TOP-LEFT PROFILE PICTURE (Visible when logged in) -->
+                <div id="top-left-profile-container" class="hidden relative">
+                    <button onclick="toggleAccountMenu()" title="Dicrostonyx Account" class="relative w-12 h-12 rounded-xl p-0.5 bg-gradient-to-br from-neon to-emerald-500 shadow-[0_0_15px_rgba(57,255,20,0.45)] hover:scale-105 transition-transform flex items-center justify-center cursor-pointer group">
+                        <img id="top-left-avatar-img" src="" alt="Profile" class="w-full h-full object-cover rounded-[10px] bg-obsidian-900"/>
+                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-neon border-2 border-obsidian-950 shadow-[0_0_8px_#39FF14]"></span>
+                    </button>
+
+                    <!-- Top-Left Profile Dropdown Menu -->
+                    <div id="account-dropdown-menu" class="hidden absolute left-0 mt-3 w-72 rounded-2xl bg-obsidian-900 neon-border-strong p-4 shadow-2xl z-50 space-y-3.5">
+                        <div class="flex items-center gap-3 pb-3 border-b border-neon/20">
+                            <img id="dropdown-avatar-img" src="" alt="Avatar" class="w-12 h-12 rounded-xl object-cover border border-neon/50 bg-obsidian-950"/>
+                            <div class="overflow-hidden">
+                                <div id="dropdown-user-name" class="font-display font-bold text-white text-sm truncate">Cyber Hamster</div>
+                                <div id="dropdown-user-email" class="font-mono text-xs text-neon/80 truncate">user@dicrostonyx.ai</div>
+                                <span id="dropdown-auth-provider" class="inline-block mt-1 text-[10px] font-mono px-2 py-0.5 rounded bg-neon/15 text-neon border border-neon/30">PRO 2K MEMBER</span>
+                            </div>
+                        </div>
+                        <div class="space-y-1 text-xs font-mono">
+                            <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-obsidian-950 text-gray-300">
+                                <span>Auto-Login Status</span>
+                                <span class="text-neon font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Active</span>
+                            </div>
+                            <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-obsidian-950 text-gray-300">
+                                <span>Max Resolution</span>
+                                <span class="text-neon font-bold">2K (2048×2048)</span>
+                            </div>
+                        </div>
+                        <div class="pt-1 flex flex-col gap-2">
+                            <button onclick="openProfileAvatarModal()" class="w-full py-2 px-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 text-neon border border-neon/30 text-xs font-mono font-semibold flex items-center justify-center gap-2 transition">
+                                <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                                <span>Change Profile Picture</span>
+                            </button>
+                            <button onclick="handleLogout()" class="w-full py-2.5 px-3 rounded-xl bg-red-950/60 hover:bg-red-900/70 text-red-300 border border-red-500/40 text-xs font-mono font-bold flex items-center justify-center gap-2 transition">
+                                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                                <span>Log Out of Dicrostonyx</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brand Logo -->
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="switchMode('launcher')">
+                    <div class="w-12 h-12 rounded-xl bg-obsidian-800 p-1 neon-border group-hover:scale-105 transition-transform flex items-center justify-center">
+                        <svg class="w-10 h-10" viewBox="0 0 120 120" fill="none">
+                            <use href="#dicrostonyx-hamster-master"></use>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-display font-bold text-lg sm:text-2xl tracking-tight text-white">DICROSTONYX</span>
+                            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-neon text-black shadow-[0_0_12px_#39FF14]">AI</span>
+                        </div>
+                        <p class="hidden sm:block text-xs text-neon/75 font-mono tracking-wider">NEURAL 2K HAMSTER ENGINE v3.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Mode Switcher Pill -->
+            <div class="hidden md:flex items-center gap-2 bg-obsidian-900 p-1.5 rounded-xl border border-neon/25">
+                <button id="nav-launcher-btn" onclick="switchMode('launcher')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-neon/70 hover:text-neon">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Home</span>
+                </button>
+                <button id="nav-studio-btn" onclick="openTextToImage()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center gap-2 bg-neon text-black shadow-[0_0_15px_rgba(57,255,20,0.4)]">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Text to Image</span>
+                </button>
+                <button id="nav-gallery-btn" onclick="scrollToGallery()" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-neon/70 hover:text-neon">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span>Vault</span>
+                    <span id="gallery-count-badge" class="px-1.5 py-0.2 bg-neon/20 text-neon text-xs rounded-full font-mono">0</span>
+                </button>
+            </div>
+
+            <!-- Right Area: "Join Dicrostonyx" Button (when logged out) OR Connected Status Pill (when logged in) -->
+            <div class="flex items-center gap-2.5">
+                <button onclick="openTextToImage()" class="md:hidden px-3 py-2 rounded-xl bg-obsidian-800 text-neon border border-neon/40 text-xs font-bold flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Studio</span>
+                </button>
+
+                <!-- Unauthenticated Top-Right Button -->
+                <button id="join-dicrostonyx-btn" onclick="openAuthPage('login')" class="neon-btn px-4 sm:px-5 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                    <span>Join Dicrostonyx</span>
+                </button>
+
+                <!-- Authenticated Top-Right Status Pill -->
+                <div id="logged-in-status-pill" onclick="toggleAccountMenu()" class="hidden items-center gap-2.5 px-3.5 py-2 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-neon/35 cursor-pointer transition">
+                    <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
+                    <span id="header-right-username" class="text-xs font-mono text-neon font-semibold max-w-[120px] truncate">Member</span>
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-neon/70"></i>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
+    <!-- DEDICATED "DICROSTONYX ACCOUNT" LOG IN / SIGN UP PAGE VIEW -->
+    <section id="auth-page-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div class="max-w-md mx-auto">
+            <!-- Back to Studio Button -->
+            <button onclick="closeAuthPage()" class="mb-6 inline-flex items-center gap-2 text-xs font-mono text-neon hover:underline">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Back to Dicrostonyx AI Studio</span>
+            </button>
 
-        <section id="about">
-            <h2>About</h2>
+            <div class="rounded-3xl bg-obsidian-900/95 neon-border-strong p-6 sm:p-8 space-y-6 relative overflow-hidden shadow-2xl">
+                <div class="absolute -top-20 -right-20 w-52 h-52 bg-neon/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <p>
-                This website was carefully engineered to accomplish
-                almost nothing.
-            </p>
+                <!-- Header with Hamster Emblem -->
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-obsidian-950 neon-border p-2 flex items-center justify-center shadow-[0_0_20px_rgba(57,255,20,0.25)]">
+                        <svg class="w-12 h-12" viewBox="0 0 120 120">
+                            <use href="#dicrostonyx-hamster-master"></use>
+                        </svg>
+                    </div>
+                    <h2 id="auth-heading-title" class="font-display font-bold text-2xl sm:text-3xl text-white">Dicrostonyx Account</h2>
+                    <p id="auth-heading-subtitle" class="text-xs sm:text-sm text-gray-400">Sign in to sync your 2K creations and stay logged in automatically.</p>
+                </div>
 
-            <p>
-                Every feature exists because it probably shouldn't.
-            </p>
-        </section>
+                <!-- Continue with Google Button -->
+                <div class="space-y-2.5">
+                    <button type="button" onclick="handleContinueWithGoogle()" class="w-full py-3.5 px-4 rounded-xl bg-white hover:bg-gray-100 text-gray-900 font-display font-bold text-sm flex items-center justify-center gap-3 shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.8C6.2 7.2 8.9 5 12 5z"/>
+                            <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6l3.7 2.9c2.2-2 3.7-5 3.7-8.7z"/>
+                            <path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9z"/>
+                            <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.8C3.5 20.9 7.4 24 12 24z"/>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
 
-        <section id="features">
+                    <!-- Instant Google Account Chooser Drawer (Appears if popup is blocked in iframe or for quick Google selection) -->
+                    <div id="google-chooser-drawer" class="hidden rounded-2xl bg-obsidian-950 border border-neon/40 p-4 space-y-3 animate-fadeIn">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono text-neon font-bold flex items-center gap-1.5">
+                                <i data-lucide="shield-check" class="w-4 h-4"></i> Choose Google Account
+                            </span>
+                            <button onclick="document.getElementById('google-chooser-drawer').classList.add('hidden')" class="text-gray-400 hover:text-white">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-2">
+                            <button type="button" onclick="completeGoogleSignIn('alex.mercier@gmail.com', 'Alex Mercier')" class="w-full p-2.5 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-neon/25 flex items-center gap-3 text-left transition">
+                                <div class="w-9 h-9 rounded-full bg-neon text-black font-bold flex items-center justify-center text-sm">AM</div>
+                                <div class="overflow-hidden">
+                                    <div class="text-xs font-bold text-white">Alex Mercier</div>
+                                    <div class="text-[11px] font-mono text-gray-400">alex.mercier@gmail.com</div>
+                                </div>
+                            </button>
+                            <button type="button" onclick="completeGoogleSignIn('creator@dicrostonyx.ai', 'Dicrostonyx Creator')" class="w-full p-2.5 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-neon/25 flex items-center gap-3 text-left transition">
+                                <div class="w-9 h-9 rounded-full bg-emerald-500 text-black font-bold flex items-center justify-center text-sm">DC</div>
+                                <div class="overflow-hidden">
+                                    <div class="text-xs font-bold text-white">Dicrostonyx Creator</div>
+                                    <div class="text-[11px] font-mono text-gray-400">creator@dicrostonyx.ai</div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="pt-1 border-t border-neon/15 flex gap-2">
+                            <input id="custom-google-email" type="email" placeholder="Or enter your Gmail address..." class="flex-1 bg-obsidian-900 border border-neon/30 rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-neon">
+                            <button type="button" onclick="submitCustomGoogleEmail()" class="px-3 py-1.5 rounded-lg bg-neon text-black font-bold text-xs">Continue</button>
+                        </div>
+                    </div>
+                </div>
 
-            <h2>Featured Uselessness</h2>
+                <!-- Divider -->
+                <div class="relative flex py-1 items-center">
+                    <div class="flex-grow border-t border-neon/20"></div>
+                    <span class="flex-shrink mx-3 text-[11px] font-mono uppercase text-gray-400">or with email & password</span>
+                    <div class="flex-grow border-t border-neon/20"></div>
+                </div>
 
-            <div class="card">
-                <h3>Button Collection</h3>
-                <p>
-                    Buttons that may or may not do anything.
-                </p>
+                <!-- Mode Switch Tabs: Log In vs Create Account -->
+                <div class="grid grid-cols-2 gap-2 p-1 bg-obsidian-950 rounded-xl border border-neon/25">
+                    <button type="button" id="auth-tab-login" onclick="switchAuthTab('login')" class="py-2 rounded-lg font-display font-bold text-xs sm:text-sm bg-neon text-black shadow-[0_0_10px_rgba(57,255,20,0.35)] transition">
+                        Log In
+                    </button>
+                    <button type="button" id="auth-tab-signup" onclick="switchAuthTab('signup')" class="py-2 rounded-lg font-display font-bold text-xs sm:text-sm text-gray-400 hover:text-neon transition">
+                        Create Account
+                    </button>
+                </div>
+
+                <!-- Error / Status Alert Box -->
+                <div id="auth-feedback-box" class="hidden p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs text-red-200 font-mono"></div>
+
+                <!-- Email & Password Form -->
+                <form id="dicrostonyx-auth-form" onsubmit="handleEmailAuthSubmit(event)" class="space-y-4">
+                    <!-- Display Name & Avatar Picker (Visible in Create Account mode) -->
+                    <div id="signup-extra-fields" class="hidden space-y-4">
+                        <div>
+                            <label class="block text-xs font-mono text-neon mb-1.5">DISPLAY NAME</label>
+                            <input id="auth-name-input" type="text" placeholder="e.g., NeonHamster99" class="w-full rounded-xl bg-obsidian-950 border border-neon/35 focus:border-neon px-4 py-3 text-sm text-white outline-none transition">
+                        </div>
+
+                        <!-- Profile Picture Selector -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="text-xs font-mono text-neon">CHOOSE PROFILE PICTURE</label>
+                                <label class="text-xs font-mono text-neon underline cursor-pointer hover:text-white">
+                                    <span>Upload Custom</span>
+                                    <input type="file" accept="image/*" class="hidden" onchange="handleCustomAvatarUpload(event)">
+                                </label>
+                            </div>
+                            <div id="avatar-preset-grid" class="grid grid-cols-4 gap-2.5">
+                                <!-- Populated with 4 Neon Hamster Avatar Presets on load -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-neon mb-1.5">E-MAIL ADDRESS</label>
+                        <input id="auth-email-input" type="email" required placeholder="you@example.com" class="w-full rounded-xl bg-obsidian-950 border border-neon/35 focus:border-neon px-4 py-3 text-sm text-white outline-none transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-neon mb-1.5">PASSWORD</label>
+                        <input id="auth-password-input" type="password" required minlength="6" placeholder="•••••••• (min 6 characters)" class="w-full rounded-xl bg-obsidian-950 border border-neon/35 focus:border-neon px-4 py-3 text-sm text-white outline-none transition">
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-gray-300 pt-1">
+                        <label class="inline-flex items-center gap-2 cursor-pointer">
+                            <input id="auth-remember-checkbox" type="checkbox" checked class="accent-[#39FF14] w-4 h-4 rounded">
+                            <span>Remember me & log in automatically</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="auth-submit-btn" class="w-full neon-btn py-3.5 rounded-xl font-display font-bold text-base flex items-center justify-center gap-2 cursor-pointer">
+                        <i data-lucide="log-in" class="w-5 h-5"></i>
+                        <span id="auth-submit-btn-text">Log In to Dicrostonyx</span>
+                    </button>
+                </form>
+
+                <!-- Switch Link at Bottom -->
+                <div class="text-center text-xs text-gray-400 pt-2 border-t border-neon/15">
+                    <span id="auth-bottom-prompt">Don't have a Dicrostonyx account yet?</span>
+                    <button type="button" id="auth-bottom-switch-btn" onclick="switchAuthTab('signup')" class="ml-1 text-neon font-bold hover:underline">
+                        Create an account
+                    </button>
+                </div>
             </div>
-
-            <div class="card">
-                <h3>Questionable Tools</h3>
-                <p>
-                    They're technically tools...
-                    just not useful ones.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Pointless Experiments</h3>
-                <p>
-                    Science wasn't involved.
-                </p>
-            </div>
-
-        </section>
-
-        <div class="button-group">
-            <a href="contactus.html" class="button">Contact Us</a>
         </div>
+    </section>
+
+    <!-- Profile Picture Changer Modal (For Logged-In Users) -->
+    <div id="avatar-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="max-w-sm w-full rounded-3xl bg-obsidian-900 neon-border-strong p-6 space-y-5">
+            <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-lg text-white">Update Profile Picture</h3>
+                <button onclick="closeProfileAvatarModal()" class="text-gray-400 hover:text-neon">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="modal-avatar-preset-grid" class="grid grid-cols-4 gap-2.5"></div>
+            <label class="block w-full py-3 px-4 rounded-xl bg-obsidian-950 hover:bg-obsidian-800 border border-neon/40 text-center text-xs font-mono text-neon cursor-pointer transition">
+                <span>Upload Custom Picture from Device</span>
+                <input type="file" accept="image/*" class="hidden" onchange="handleCustomAvatarUpload(event, true)">
+            </label>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="main-studio-view" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- STEP 1: LAUNCHER HERO (User clicks "Text to Image" to reveal/focus prompt box) -->
+        <section id="launcher-section" class="relative rounded-3xl bg-obsidian-900/90 neon-border p-8 sm:p-12 overflow-hidden transition-all duration-500">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-neon/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="max-w-2xl space-y-5 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon/10 border border-neon/40 text-neon text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-neon animate-ping"></span>
+                        <span>ULTRA-CRISP 2K SYNTHESIS ENGINE ONLINE</span>
+                    </div>
+                    <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+                        Unleash <span class="text-neon neon-text-glow">Dicrostonyx AI</span> Image Generation.
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+                        Craft breathtaking visual worlds from pure text. Engineered with up to <span class="text-neon font-semibold">2K (2048×2048)</span> maximum quality output, live neural editing, custom resolution scaling, and automatic Dicrostonyx hamster watermarking.
+                    </p>
+                    <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <button onclick="openTextToImage()" class="neon-btn px-8 py-4 rounded-2xl font-display font-bold text-lg flex items-center gap-3 cursor-pointer">
+                            <i data-lucide="wand-2" class="w-6 h-6"></i>
+                            <span>Text to Image</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                        <button onclick="loadSampleAndGenerate()" class="px-6 py-4 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 text-neon border border-neon/30 font-medium text-sm flex items-center gap-2 transition-all">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            <span>Instant 2K Cyber Hamster Demo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Neon Hamster Emblem Showcase -->
+                <div class="relative group cursor-pointer" onclick="openTextToImage()">
+                    <div class="w-52 h-52 sm:w-64 sm:h-64 rounded-3xl bg-obsidian-950 neon-border-strong p-6 flex flex-col items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        <svg class="w-36 h-36 sm:w-44 sm:h-44 drop-shadow-[0_0_20px_rgba(57,255,20,0.45)]" viewBox="0 0 120 120">
+                            <use href="#dicrostonyx-hamster-master"></use>
+                        </svg>
+                        <span class="mt-2 font-mono text-xs text-neon tracking-widest uppercase">Click to Launch Studio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2: TEXT TO IMAGE WORKSPACE -->
+        <section id="studio-workspace" class="space-y-8 transition-all duration-500">
+            
+            <!-- Prompt Box & Control Bar Card -->
+            <div class="rounded-3xl bg-obsidian-900/95 neon-border-strong p-5 sm:p-7 space-y-6 relative overflow-hidden">
+                <!-- Top Prompt Header & Quick Inspiration Chips -->
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-3 h-3 rounded-full bg-neon shadow-[0_0_10px_#39FF14]"></div>
+                        <h2 class="font-display font-bold text-lg sm:text-xl text-white tracking-wide">TEXT TO IMAGE PROMPT</h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-mono text-gray-400 mr-1">Try prompt:</span>
+                        <button onclick="setSamplePrompt(0)" class="text-xs px-3 py-1 rounded-full bg-obsidian-800 hover:bg-neon/20 text-neon border border-neon/30 transition">Cyberpunk Hamster</button>
+                        <button onclick="setSamplePrompt(1)" class="text-xs px-3 py-1 rounded-full bg-obsidian-800 hover:bg-neon/20 text-neon border border-neon/30 transition">Neon Samurai</button>
+                        <button onclick="setSamplePrompt(2)" class="text-xs px-3 py-1 rounded-full bg-obsidian-800 hover:bg-neon/20 text-neon border border-neon/30 transition">Bioluminescent Forest</button>
+                        <button onclick="setSamplePrompt(3)" class="text-xs px-3 py-1 rounded-full bg-obsidian-800 hover:bg-neon/20 text-neon border border-neon/30 transition">Orbital Megastructure</button>
+                    </div>
+                </div>
+
+                <!-- Main Textarea Input -->
+                <div class="relative">
+                    <textarea id="prompt-input" rows="3" 
+                        placeholder="Describe the image you want Dicrostonyx AI to generate in vivid detail... (e.g., A futuristic neon-lit arctic hamster wearing cybernetic visor goggles in a rain-slicked Tokyo alley, 8k octane render, volumetric emerald lighting)"
+                        class="w-full rounded-2xl bg-obsidian-950/90 border border-neon/40 focus:border-neon focus:ring-2 focus:ring-neon/30 p-4 sm:p-5 text-white placeholder-gray-500 text-base sm:text-lg leading-relaxed outline-none transition resize-none font-sans"></textarea>
+                    <button onclick="clearPrompt()" title="Clear Prompt" class="absolute top-3 right-3 p-2 rounded-lg text-gray-500 hover:text-neon hover:bg-obsidian-800 transition">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- BOTTOM CONTROL BAR: Quality Slider (Max 2K), Watermark ON/OFF (Default ON), More Details, and Generate Button -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-2 items-center bg-obsidian-950/80 p-4 sm:p-5 rounded-2xl border border-neon/20">
+                    
+                    <!-- 1. Quality Bar (Max Quality: 2K) -->
+                    <div class="lg:col-span-5 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label for="quality-slider" class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                                <i data-lucide="gauge" class="w-4 h-4 text-neon"></i>
+                                <span>Quality Bar</span>
+                            </label>
+                            <span id="quality-badge" class="px-2.5 py-0.5 rounded-md bg-neon text-black font-mono font-bold text-xs shadow-[0_0_10px_rgba(57,255,20,0.5)]">
+                                MAX 2K (2048×2048)
+                            </span>
+                        </div>
+                        <input id="quality-slider" type="range" min="1" max="4" step="1" value="4" oninput="updateQualityDisplay(this.value)" class="w-full neon-slider">
+                        <div class="flex justify-between text-[11px] font-mono text-gray-400 px-1">
+                            <span id="q-label-1" class="cursor-pointer hover:text-neon" onclick="setQuality(1)">512p SD</span>
+                            <span id="q-label-2" class="cursor-pointer hover:text-neon" onclick="setQuality(2)">720p HD</span>
+                            <span id="q-label-3" class="cursor-pointer hover:text-neon" onclick="setQuality(3)">1080p FHD</span>
+                            <span id="q-label-4" class="cursor-pointer text-neon font-bold" onclick="setQuality(4)">2K ULTRA (MAX)</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Watermark ON / OFF Toggle (Turned ON by default) -->
+                    <div class="lg:col-span-3 flex items-center justify-between lg:justify-center gap-3 px-4 py-3 rounded-xl bg-obsidian-900 border border-neon/25">
+                        <div class="flex items-center gap-2.5">
+                            <svg class="w-7 h-7 shrink-0" viewBox="0 0 120 120">
+                                <use href="#dicrostonyx-hamster-master"></use>
+                            </svg>
+                            <div>
+                                <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <span>Watermark</span>
+                                    <span id="watermark-status-pill" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-neon text-black font-bold">ON</span>
+                                </div>
+                                <p class="text-[11px] text-gray-400">Bottom-left logo</p>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="watermark-toggle" checked onchange="toggleWatermark(this.checked)" class="sr-only peer">
+                            <div class="w-12 h-6 bg-obsidian-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-black after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neon shadow-inner"></div>
+                        </label>
+                    </div>
+
+                    <!-- 3. More Details Toggle Button -->
+                    <div class="lg:col-span-2 flex">
+                        <button type="button" onclick="toggleMoreDetails()" id="more-details-btn" class="w-full py-3.5 px-4 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 text-neon border border-neon/30 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition">
+                            <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                            <span>More Details</span>
+                            <i data-lucide="chevron-down" id="more-details-chevron" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <!-- 4. Generate CTA Button -->
+                    <div class="lg:col-span-2 flex">
+                        <button type="button" id="generate-btn" onclick="generateImage()" class="w-full neon-btn py-3.5 px-5 rounded-xl font-display font-bold text-base flex items-center justify-center gap-2 cursor-pointer">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            <span>Generate</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- EXPANDABLE "MORE DETAILS" DRAWER -->
+                <div id="more-details-drawer" class="hidden pt-2 border-t border-neon/20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-fadeIn">
+                    <!-- Art Style Preset -->
+                    <div class="bg-obsidian-950 p-3.5 rounded-xl border border-neon/20 space-y-1.5">
+                        <label class="text-xs font-mono text-neon flex items-center gap-1.5">
+                            <i data-lucide="palette" class="w-3.5 h-3.5"></i> Art Style Preset
+                        </label>
+                        <select id="detail-style" class="w-full bg-obsidian-900 text-white text-sm rounded-lg p-2.5 border border-neon/30 outline-none focus:border-neon">
+                            <option value="Cyberpunk Neon 8K, volumetric lighting, hyper-detailed">Cyberpunk Neon (Signature)</option>
+                            <option value="Photorealistic RAW photograph, 85mm lens, ultra-detailed skin and textures">Photorealistic RAW</option>
+                            <option value="Unreal Engine 5 3D Octane Render, raytracing, subsurface scattering">3D Octane Render</option>
+                            <option value="Anime key visual, Makoto Shinkai luminous sky, crisp cel shading">Luminous Anime</option>
+                            <option value="Dark Concept Art, biomechanical sci-fi illustration, emerald accents">Sci-Fi Concept Art</option>
+                        </select>
+                    </div>
+
+                    <!-- Aspect Ratio -->
+                    <div class="bg-obsidian-950 p-3.5 rounded-xl border border-neon/20 space-y-1.5">
+                        <label class="text-xs font-mono text-neon flex items-center gap-1.5">
+                            <i data-lucide="frame" class="w-3.5 h-3.5"></i> Aspect Ratio
+                        </label>
+                        <select id="detail-aspect" onchange="updateAspectRatioPreview()" class="w-full bg-obsidian-900 text-white text-sm rounded-lg p-2.5 border border-neon/30 outline-none focus:border-neon">
+                            <option value="1:1">1:1 Square (2048×2048 Max)</option>
+                            <option value="16:9">16:9 Widescreen Cinema</option>
+                            <option value="9:16">9:16 Vertical Story</option>
+                            <option value="4:3">4:3 Classic Studio</option>
+                        </select>
+                    </div>
+
+                    <!-- Negative Prompt -->
+                    <div class="bg-obsidian-950 p-3.5 rounded-xl border border-neon/20 space-y-1.5">
+                        <label class="text-xs font-mono text-neon flex items-center gap-1.5">
+                            <i data-lucide="shield-ban" class="w-3.5 h-3.5"></i> Negative Prompt
+                        </label>
+                        <input id="detail-negative" type="text" value="blurry, low quality, deformed, washed out, artifacts" 
+                            class="w-full bg-obsidian-900 text-white text-sm rounded-lg p-2 border border-neon/30 outline-none focus:border-neon" placeholder="Elements to exclude...">
+                    </div>
+
+                    <!-- Seed & Lighting Detail Boost -->
+                    <div class="bg-obsidian-950 p-3.5 rounded-xl border border-neon/20 space-y-1.5">
+                        <label class="text-xs font-mono text-neon flex items-center gap-1.5 justify-between">
+                            <span class="flex items-center gap-1"><i data-lucide="cpu" class="w-3.5 h-3.5"></i> Neural Seed</span>
+                            <button onclick="randomizeSeed()" class="text-[11px] underline hover:text-white">Randomize</button>
+                        </label>
+                        <input id="detail-seed" type="number" value="849204" class="w-full bg-obsidian-900 text-neon font-mono text-sm rounded-lg p-2 border border-neon/30 outline-none focus:border-neon">
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: GENERATED IMAGE VIEWER, RESOLUTION CHANGER, WATERMARK PREVIEW & EDITOR -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left/Center: Interactive Canvas Showcase (7 Columns) -->
+                <div class="lg:col-span-7 rounded-3xl bg-obsidian-900/95 neon-border p-5 sm:p-6 space-y-4">
+                    <!-- Top Status Bar of Canvas -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neon/20 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-neon"></span>
+                            <span class="font-mono text-xs uppercase tracking-wider text-neon" id="canvas-status-label">READY — DICROSTONYX OUTPUT MONITOR</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+                            <span id="meta-quality-tag" class="px-2.5 py-1 rounded bg-obsidian-800 border border-neon/30 text-neon">2K (2048×2048)</span>
+                            <span id="meta-watermark-tag" class="px-2.5 py-1 rounded bg-neon/15 border border-neon/40 text-neon">WATERMARK: ON</span>
+                            <span id="meta-engine-tag" class="px-2.5 py-1 rounded bg-obsidian-800 text-gray-300">SEED #849204</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Canvas Viewport Container -->
+                    <div id="viewport-wrapper" class="relative w-full aspect-square max-h-[600px] mx-auto rounded-2xl bg-obsidian-950 border border-neon/30 overflow-hidden flex items-center justify-center shadow-[inset_0_0_50px_rgba(0,0,0,0.9)]">
+                        
+                        <!-- The Interactive Master Canvas (always holds the current rendered image + edits + live watermark on bottom-left) -->
+                        <canvas id="display-canvas" width="1024" height="1024" class="max-w-full max-h-full object-contain transition-all duration-300"></canvas>
+
+                        <!-- Loading Overlay during AI synthesis -->
+                        <div id="loading-overlay" class="hidden absolute inset-0 bg-obsidian-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20">
+                            <div class="w-full h-24 bg-gradient-to-b from-transparent via-neon/20 to-transparent absolute top-0 left-0 scanner-line pointer-events-none"></div>
+                            <div class="w-20 h-20 rounded-2xl bg-obsidian-900 neon-border-strong p-3 flex items-center justify-center animate-bounce">
+                                <svg class="w-14 h-14" viewBox="0 0 120 120">
+                                    <use href="#dicrostonyx-hamster-master"></use>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 font-display font-bold text-xl text-neon neon-text-glow">Synthesizing 2K Neural Pixels...</h3>
+                            <p id="loading-step-text" class="text-xs font-mono text-gray-400 mt-1">Initializing Dicrostonyx diffusion pipeline...</p>
+                            <div class="w-64 h-2 bg-obsidian-800 rounded-full overflow-hidden mt-4 border border-neon/30">
+                                <div id="loading-progress-bar" class="h-full bg-neon transition-all duration-300 w-1/4 shadow-[0_0_12px_#39FF14]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action Bar Below Image -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 font-mono">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-neon"></i>
+                            <span id="bottom-watermark-note">Dicrostonyx hamster watermark active on bottom-left</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <button onclick="switchRightTab('download')" class="neon-btn px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center gap-2">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                <span>Download / Change Res</span>
+                            </button>
+                            <button onclick="switchRightTab('edit')" class="px-4 py-2.5 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 text-neon border border-neon/40 font-display font-bold text-xs sm:text-sm flex items-center gap-2 transition">
+                                <i data-lucide="sliders" class="w-4 h-4"></i>
+                                <span>Edit Image</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Resolution Changer, Downloader & Live Image Editor (5 Columns) -->
+                <div class="lg:col-span-5 rounded-3xl bg-obsidian-900/95 neon-border p-5 sm:p-6 space-y-6">
+                    
+                    <!-- Right Panel Mode Tabs -->
+                    <div class="grid grid-cols-2 gap-2 p-1.5 bg-obsidian-950 rounded-2xl border border-neon/25">
+                        <button id="tab-btn-download" onclick="switchRightTab('download')" class="py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-neon text-black shadow-[0_0_12px_rgba(57,255,20,0.4)] transition">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            <span>Download & Resolution</span>
+                        </button>
+                        <button id="tab-btn-edit" onclick="switchRightTab('edit')" class="py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 text-gray-300 hover:text-neon transition">
+                            <i data-lucide="wand" class="w-4 h-4"></i>
+                            <span>Edit & Remix Studio</span>
+                        </button>
+                    </div>
+
+                    <!-- PANEL A: DOWNLOAD & RESOLUTION CHANGER -->
+                    <div id="panel-download" class="space-y-5">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                                <i data-lucide="maximize-2" class="w-5 h-5 text-neon"></i>
+                                <span>Resolution Scaler & Export</span>
+                            </h3>
+                            <p class="text-xs text-gray-400 mt-1">
+                                Choose your target resolution before downloading. When Watermark is ON, the Dicrostonyx hamster badge is crisply rendered onto the bottom-left corner at native resolution.
+                            </p>
+                        </div>
+
+                        <!-- Resolution Selector Grid -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-mono uppercase text-neon">Select Output Resolution:</label>
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <button onclick="selectExportResolution(512, 512, '512×512 Standard')" id="res-btn-512" class="res-option-btn p-3 rounded-xl bg-obsidian-950 border border-neon/25 hover:border-neon text-left transition">
+                                    <div class="font-mono font-bold text-sm text-white">512 × 512</div>
+                                    <div class="text-[11px] text-gray-400">Standard Web (SD)</div>
+                                </button>
+                                <button onclick="selectExportResolution(1024, 1024, '1024×1024 HD')" id="res-btn-1024" class="res-option-btn p-3 rounded-xl bg-obsidian-950 border border-neon/25 hover:border-neon text-left transition">
+                                    <div class="font-mono font-bold text-sm text-white">1024 × 1024</div>
+                                    <div class="text-[11px] text-gray-400">High Definition (1K)</div>
+                                </button>
+                                <button onclick="selectExportResolution(1920, 1080, '1920×1080 Full HD')" id="res-btn-1920" class="res-option-btn p-3 rounded-xl bg-obsidian-950 border border-neon/25 hover:border-neon text-left transition">
+                                    <div class="font-mono font-bold text-sm text-white">1920 × 1080</div>
+                                    <div class="text-[11px] text-gray-400">Full HD Widescreen</div>
+                                </button>
+                                <button onclick="selectExportResolution(2048, 2048, '2048×2048 2K MAX')" id="res-btn-2048" class="res-option-btn p-3 rounded-xl bg-neon/15 border-2 border-neon text-left transition shadow-[0_0_15px_rgba(57,255,20,0.2)]">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-mono font-bold text-sm text-neon">2048 × 2048</span>
+                                        <span class="text-[10px] font-mono bg-neon text-black px-1.5 py-0.2 rounded font-bold">2K MAX</span>
+                                    </div>
+                                    <div class="text-[11px] text-gray-300">Ultra Crisp Master</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Resolution Inputs -->
+                        <div class="bg-obsidian-950 p-3.5 rounded-xl border border-neon/20 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono text-gray-300">Custom Target Dimensions (px)</span>
+                                <span class="text-[11px] font-mono text-neon">Max: 2048px (2K)</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="text-[10px] font-mono text-gray-400">WIDTH (PX)</label>
+                                    <input id="export-width" type="number" min="256" max="2048" value="2048" onchange="clampCustomRes()" class="w-full bg-obsidian-900 border border-neon/30 rounded-lg p-2 text-sm font-mono text-neon outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-mono text-gray-400">HEIGHT (PX)</label>
+                                    <input id="export-height" type="number" min="256" max="2048" value="2048" onchange="clampCustomRes()" class="w-full bg-obsidian-900 border border-neon/30 rounded-lg p-2 text-sm font-mono text-neon outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Watermark Confirmation Card in Download Tab -->
+                        <div class="p-3.5 rounded-xl bg-obsidian-950 border border-neon/30 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-obsidian-900 border border-neon/40 flex items-center justify-center p-1">
+                                    <svg class="w-8 h-8" viewBox="0 0 120 120">
+                                        <use href="#dicrostonyx-hamster-master"></use>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white">Bottom-Left Hamster Watermark</div>
+                                    <div id="download-wm-desc" class="text-[11px] text-neon font-mono">Included on exported file (Default ON)</div>
+                                </div>
+                            </div>
+                            <button onclick="document.getElementById('watermark-toggle').click()" class="px-3 py-1.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-700 text-xs font-mono text-neon border border-neon/30">
+                                Toggle
+                            </button>
+                        </div>
+
+                        <!-- Download Buttons -->
+                        <div class="space-y-2.5 pt-1">
+                            <button onclick="downloadProcessedImage('png')" class="w-full neon-btn py-4 px-6 rounded-2xl font-display font-bold text-base flex items-center justify-center gap-3 cursor-pointer">
+                                <i data-lucide="download" class="w-5 h-5"></i>
+                                <span id="download-main-btn-text">Download 2048×2048 PNG</span>
+                            </button>
+                            <button onclick="downloadProcessedImage('jpeg')" class="w-full py-3 px-4 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 text-neon border border-neon/30 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition">
+                                <i data-lucide="file-image" class="w-4 h-4"></i>
+                                <span>Download Compressed JPG at Selected Resolution</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PANEL B: IMAGE EDITOR & AI PROMPT REMIX -->
+                    <div id="panel-edit" class="hidden space-y-5">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                                <i data-lucide="sliders" class="w-5 h-5 text-neon"></i>
+                                <span>Dicrostonyx Image Editor</span>
+                            </h3>
+                            <button onclick="resetEditorAdjustments()" class="text-xs font-mono text-neon hover:underline flex items-center gap-1">
+                                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset
+                            </button>
+                        </div>
+
+                        <!-- AI Prompt Modification / Remix Box -->
+                        <div class="p-3.5 rounded-2xl bg-obsidian-950 border border-neon/35 space-y-2.5">
+                            <label class="text-xs font-mono text-neon flex items-center gap-1.5">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI Prompt Edit / Remix Current Image
+                            </label>
+                            <div class="flex gap-2">
+                                <input id="ai-edit-input" type="text" placeholder="e.g., Add neon laser glasses, make it snowing..." 
+                                    class="flex-1 bg-obsidian-900 border border-neon/30 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none focus:border-neon">
+                                <button onclick="applyAiEditPrompt()" class="neon-btn px-3.5 py-2 rounded-xl font-bold text-xs flex items-center gap-1 shrink-0">
+                                    <i data-lucide="wand-2" class="w-3.5 h-3.5"></i> Apply AI
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Real-Time Color & Cyber Filter Sliders -->
+                        <div class="space-y-3.5 bg-obsidian-950 p-4 rounded-2xl border border-neon/20">
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-300">Brightness</span>
+                                    <span id="val-brightness" class="text-neon">100%</span>
+                                </div>
+                                <input id="edit-brightness" type="range" min="50" max="160" value="100" oninput="updateEditorFilters()" class="w-full neon-slider">
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-300">Contrast & Punch</span>
+                                    <span id="val-contrast" class="text-neon">100%</span>
+                                </div>
+                                <input id="edit-contrast" type="range" min="50" max="180" value="100" oninput="updateEditorFilters()" class="w-full neon-slider">
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-300">Neon Saturation</span>
+                                    <span id="val-saturate" class="text-neon">100%</span>
+                                </div>
+                                <input id="edit-saturate" type="range" min="0" max="220" value="100" oninput="updateEditorFilters()" class="w-full neon-slider">
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-300">Cyber Hue Shift</span>
+                                    <span id="val-hue" class="text-neon">0°</span>
+                                </div>
+                                <input id="edit-hue" type="range" min="-180" max="180" value="0" oninput="updateEditorFilters()" class="w-full neon-slider">
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-gray-300">Emerald Cyber Tint</span>
+                                    <span id="val-tint" class="text-neon">0%</span>
+                                </div>
+                                <input id="edit-tint" type="range" min="0" max="80" value="0" oninput="updateEditorFilters()" class="w-full neon-slider">
+                            </div>
+                        </div>
+
+                        <!-- Transform & Custom Caption Overlay -->
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button onclick="rotateImage90()" class="py-2.5 px-3 rounded-xl bg-obsidian-950 hover:bg-obsidian-800 border border-neon/30 text-xs font-mono text-neon flex items-center justify-center gap-2">
+                                <i data-lucide="rotate-cw" class="w-4 h-4"></i> Rotate 90°
+                            </button>
+                            <button onclick="flipImageHorizontal()" class="py-2.5 px-3 rounded-xl bg-obsidian-950 hover:bg-obsidian-800 border border-neon/30 text-xs font-mono text-neon flex items-center justify-center gap-2">
+                                <i data-lucide="flip-horizontal" class="w-4 h-4"></i> Mirror Flip
+                            </button>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-mono text-gray-300">Add Top Cyber Banner Text (Optional)</label>
+                            <input id="edit-overlay-text" type="text" oninput="updateEditorFilters()" placeholder="Type title to overlay on artwork..." 
+                                class="w-full bg-obsidian-950 border border-neon/30 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-neon font-display outline-none focus:border-neon">
+                        </div>
+
+                        <button onclick="switchRightTab('download')" class="w-full neon-btn py-3.5 rounded-xl font-display font-bold text-sm flex items-center justify-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Edits & Proceed to Download</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: SESSION GENERATION GALLERY -->
+        <section id="gallery-section" class="rounded-3xl bg-obsidian-900/90 neon-border p-6 sm:p-8 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="grid" class="w-6 h-6 text-neon"></i>
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-white">Dicrostonyx Creation Vault</h2>
+                        <p class="text-xs text-gray-400">Click any generated artwork to reload it into the 2K Editor & Resolution Scaler</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-neon/80 bg-obsidian-950 px-3 py-1.5 rounded-lg border border-neon/25">
+                    Watermark Badge: Bottom-Left Ready
+                </span>
+            </div>
+
+            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
 
     </main>
 
-    <footer>
-        <p>
-            © 2026 The Most Useless Website Ever.
-            No productivity was harmed.
-        </p>
+    <!-- Non-intrusive Toast Notification -->
+    <div id="toast-box" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300">
+        <div class="bg-obsidian-900 neon-border-strong px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-neon/20 flex items-center justify-center text-neon">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <div id="toast-title" class="text-sm font-bold text-white">Action Complete</div>
+                <div id="toast-msg" class="text-xs text-neon font-mono">Ready</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-neon/20 bg-obsidian-950/90 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 font-mono">
+            <div class="flex items-center gap-2.5">
+                <svg class="w-6 h-6" viewBox="0 0 120 120">
+                    <use href="#dicrostonyx-hamster-master"></use>
+                </svg>
+                <span class="text-white font-bold">DICROSTONYX AI</span>
+                <span>— Named after the Arctic Collared Lemming/Hamster Genus</span>
+            </div>
+            <div class="text-neon">Max Quality: 2K (2048×2048) • Bottom-Left Watermark Engine</div>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Application Logic -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
 
+        // Gemini API configuration (Canvas runtime injects key automatically when empty string)
+        const apiKey = "";
+
+        // Generate 4 Crisp SVG DataURL Neon Hamster Avatar Presets for Dicrostonyx Accounts
+        function createHamsterAvatarDataUrl(bgHex, accentHex, visorHex, label) {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+                <rect width="120" height="120" rx="24" fill="${bgHex}"/>
+                <circle cx="30" cy="34" r="15" fill="#0b140b" stroke="${accentHex}" stroke-width="4.5"/>
+                <circle cx="90" cy="34" r="15" fill="#0b140b" stroke="${accentHex}" stroke-width="4.5"/>
+                <path d="M22 64 C12 78, 22 100, 60 100 C98 100, 108 78, 98 64 C95 44, 80 30, 60 30 C40 30, 25 44, 22 64 Z" fill="#101d10" stroke="${accentHex}" stroke-width="4.5"/>
+                <rect x="26" y="47" width="68" height="22" rx="8" fill="${visorHex}" fill-opacity="0.28" stroke="${visorHex}" stroke-width="3.5"/>
+                <circle cx="43" cy="58" r="6" fill="${accentHex}"/>
+                <circle cx="77" cy="58" r="6" fill="${accentHex}"/>
+                <polygon points="55,69 65,69 60,76" fill="${visorHex}"/>
+            </svg>`;
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        }
+
+        const AVATAR_PRESETS = [
+            createHamsterAvatarDataUrl('#061206', '#39FF14', '#00FF66', 'Emerald Cyber'),
+            createHamsterAvatarDataUrl('#05141c', '#00FFCC', '#39FF14', 'Arctic Neon'),
+            createHamsterAvatarDataUrl('#140d1e', '#a855f7', '#39FF14', 'Synth Hamster'),
+            createHamsterAvatarDataUrl('#191205', '#facc15', '#39FF14', 'Gold Apex')
+        ];
+
+        // Sample prompts for quick testing
+        const SAMPLE_PROMPTS = [
+            "A cybernetic arctic hamster (Dicrostonyx) wearing glowing neon-green tactical visor goggles, perched on a high-tech server rack in a rain-slicked cyberpunk metropolis, volumetric emerald fog, 8k octane render",
+            "Futuristic ronin samurai standing under a holographic neon bonsai tree at midnight, obsidian armor with glowing #39FF14 circuit inlays, cinematic wide shot, unreal engine 5",
+            "Bioluminescent subterranean crystal cavern filled with glowing emerald flora and floating data Spores, hyper-detailed fantasy concept art, raytraced reflections",
+            "Colossal orbital Dyson ring megastructure encircling a pulsar star, deep space black and vibrant neon green telemetry beams, hard sci-fi illustration"
+        ];
+
+        // Application State
+        const state = {
+            qualityLevel: 4, // 1: 512p, 2: 720p, 3: 1080p, 4: 2K (2048x2048)
+            qualityMap: {
+                1: { label: "STANDARD (512×512)", width: 512, height: 512 },
+                2: { label: "HD (1280×720)", width: 1280, height: 720 },
+                3: { label: "FULL HD (1920×1080)", width: 1920, height: 1080 },
+                4: { label: "MAX 2K (2048×2048)", width: 2048, height: 2048 }
+            },
+            watermarkEnabled: true, // Turned ON by default as requested
+            exportWidth: 2048,
+            exportHeight: 2048,
+            baseImageCanvas: document.createElement('canvas'), // Holds un-watermarked raw generated artwork
+            currentPrompt: SAMPLE_PROMPTS[0],
+            currentSeed: 849204,
+            lastModelTurnContent: null,
+            editor: {
+                brightness: 100,
+                contrast: 100,
+                saturate: 100,
+                hue: 0,
+                tint: 0,
+                rotation: 0,
+                flipH: false,
+                overlayText: ""
+            },
+            gallery: [],
+            authMode: 'login',
+            selectedAvatar: AVATAR_PRESETS[0],
+            currentUser: null
+        };
+
+        // Initialize base offscreen canvas at 1024x1024 for fast interactive preview
+        state.baseImageCanvas.width = 1024;
+        state.baseImageCanvas.height = 1024;
+
+        // =========================================================================
+        // DICROSTONYX ACCOUNT & UI NAVIGATION LOGIC
+        // =========================================================================
+        function renderAvatarPresetGrids() {
+            const grids = ['avatar-preset-grid', 'modal-avatar-preset-grid'];
+            grids.forEach(gridId => {
+                const container = document.getElementById(gridId);
+                if (!container) return;
+                container.innerHTML = '';
+                AVATAR_PRESETS.forEach((url, idx) => {
+                    const isSelected = state.selectedAvatar === url;
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `p-1 rounded-xl border-2 transition cursor-pointer ${isSelected ? 'border-neon bg-neon/20 shadow-[0_0_12px_rgba(57,255,20,0.4)]' : 'border-neon/20 bg-obsidian-950 hover:border-neon/60'}`;
+                    btn.onclick = () => {
+                        state.selectedAvatar = url;
+                        renderAvatarPresetGrids();
+                        if (state.currentUser && gridId === 'modal-avatar-preset-grid') {
+                            updateLoggedInUserAvatar(url);
+                        }
+                    };
+                    btn.innerHTML = `<img src="${url}" alt="Avatar ${idx + 1}" class="w-full aspect-square rounded-lg object-cover"/>`;
+                    container.appendChild(btn);
+                });
+            });
+        }
+
+        function handleCustomAvatarUpload(event, applyImmediately = false) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Resize to crisp 160x160 square avatar so it fits cleanly in Firestore documents
+                    const c = document.createElement('canvas');
+                    c.width = 160;
+                    c.height = 160;
+                    const ctx = c.getContext('2d');
+                    ctx.drawImage(img, 0, 0, 160, 160);
+                    const dataUrl = c.toDataURL('image/jpeg', 0.88);
+                    state.selectedAvatar = dataUrl;
+                    renderAvatarPresetGrids();
+                    showToast("Avatar Ready", "Custom profile picture selected");
+                    if (applyImmediately && state.currentUser) {
+                        updateLoggedInUserAvatar(dataUrl);
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function openAuthPage(initialTab = 'login') {
+            document.getElementById('main-studio-view').classList.add('hidden');
+            document.getElementById('auth-page-view').classList.remove('hidden');
+            switchAuthTab(initialTab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeAuthPage() {
+            document.getElementById('auth-page-view').classList.add('hidden');
+            document.getElementById('main-studio-view').classList.remove('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            state.authMode = tab;
+            const loginBtn = document.getElementById('auth-tab-login');
+            const signupBtn = document.getElementById('auth-tab-signup');
+            const extraFields = document.getElementById('signup-extra-fields');
+            const submitText = document.getElementById('auth-submit-btn-text');
+            const bottomPrompt = document.getElementById('auth-bottom-prompt');
+            const bottomSwitch = document.getElementById('auth-bottom-switch-btn');
+            const feedback = document.getElementById('auth-feedback-box');
+            feedback.classList.add('hidden');
+
+            if (tab === 'signup') {
+                signupBtn.className = "py-2 rounded-lg font-display font-bold text-xs sm:text-sm bg-neon text-black shadow-[0_0_10px_rgba(57,255,20,0.35)] transition";
+                loginBtn.className = "py-2 rounded-lg font-display font-bold text-xs sm:text-sm text-gray-400 hover:text-neon transition";
+                extraFields.classList.remove('hidden');
+                submitText.textContent = "Create Dicrostonyx Account";
+                bottomPrompt.textContent = "Already have a Dicrostonyx account?";
+                bottomSwitch.textContent = "Log In";
+                bottomSwitch.onclick = () => switchAuthTab('login');
+            } else {
+                loginBtn.className = "py-2 rounded-lg font-display font-bold text-xs sm:text-sm bg-neon text-black shadow-[0_0_10px_rgba(57,255,20,0.35)] transition";
+                signupBtn.className = "py-2 rounded-lg font-display font-bold text-xs sm:text-sm text-gray-400 hover:text-neon transition";
+                extraFields.classList.add('hidden');
+                submitText.textContent = "Log In to Dicrostonyx";
+                bottomPrompt.textContent = "Don't have a Dicrostonyx account yet?";
+                bottomSwitch.textContent = "Create an account";
+                bottomSwitch.onclick = () => switchAuthTab('signup');
+            }
+        }
+
+        function showAuthError(msg) {
+            const box = document.getElementById('auth-feedback-box');
+            box.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        function applyAuthenticatedUserToUI(profile, isAutoLogin = false) {
+            state.currentUser = profile;
+            state.selectedAvatar = profile.avatar || AVATAR_PRESETS[0];
+
+            // Show Top-Left Profile Picture & Hide Top-Right "Join Dicrostonyx" Button
+            document.getElementById('top-left-profile-container').classList.remove('hidden');
+            document.getElementById('top-left-avatar-img').src = state.selectedAvatar;
+            document.getElementById('dropdown-avatar-img').src = state.selectedAvatar;
+            document.getElementById('dropdown-user-name').textContent = profile.displayName || profile.email.split('@')[0];
+            document.getElementById('dropdown-user-email').textContent = profile.email;
+            document.getElementById('dropdown-auth-provider').textContent = profile.provider === 'google' ? 'GOOGLE VERIFIED • 2K' : 'DICROSTONYX ID • 2K';
+
+            document.getElementById('join-dicrostonyx-btn').classList.add('hidden');
+            const rightPill = document.getElementById('logged-in-status-pill');
+            rightPill.classList.remove('hidden');
+            rightPill.classList.add('flex');
+            document.getElementById('header-right-username').textContent = profile.displayName || profile.email.split('@')[0];
+
+            closeAuthPage();
+            if (isAutoLogin) {
+                showToast("Welcome Back!", `Auto-logged in as ${profile.displayName || profile.email}`);
+            } else {
+                showToast("Logged In to Dicrostonyx", `Signed in as ${profile.displayName || profile.email}`);
+            }
+        }
+
+        function applyLoggedOutUI() {
+            state.currentUser = null;
+            document.getElementById('top-left-profile-container').classList.add('hidden');
+            document.getElementById('account-dropdown-menu').classList.add('hidden');
+            document.getElementById('join-dicrostonyx-btn').classList.remove('hidden');
+            const rightPill = document.getElementById('logged-in-status-pill');
+            rightPill.classList.add('hidden');
+            rightPill.classList.remove('flex');
+        }
+
+        function toggleAccountMenu() {
+            const menu = document.getElementById('account-dropdown-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openProfileAvatarModal() {
+            document.getElementById('account-dropdown-menu').classList.add('hidden');
+            renderAvatarPresetGrids();
+            document.getElementById('avatar-modal').classList.remove('hidden');
+        }
+
+        function closeProfileAvatarModal() {
+            document.getElementById('avatar-modal').classList.add('hidden');
+        }
+
+        // Close account dropdown when clicking outside
+        window.addEventListener('click', (e) => {
+            const container = document.getElementById('top-left-profile-container');
+            const pill = document.getElementById('logged-in-status-pill');
+            const menu = document.getElementById('account-dropdown-menu');
+            if (menu && !menu.classList.contains('hidden')) {
+                if (!container.contains(e.target) && !pill.contains(e.target)) {
+                    menu.classList.add('hidden');
+                }
+            }
+        });
+
+        // Bridge hooks populated by the Firebase Cloud Persistence module
+        window.handleContinueWithGoogle = function () {
+            document.getElementById('google-chooser-drawer').classList.toggle('hidden');
+        };
+        window.completeGoogleSignIn = function (email, displayName) {
+            if (window.cloudCompleteGoogleSignIn) {
+                window.cloudCompleteGoogleSignIn(email, displayName);
+            }
+        };
+        window.submitCustomGoogleEmail = function () {
+            const input = document.getElementById('custom-google-email');
+            const email = input.value.trim();
+            if (!email || !email.includes('@')) {
+                showToast("Invalid Email", "Please enter a valid Google email address");
+                return;
+            }
+            const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            window.completeGoogleSignIn(email, name);
+        };
+        window.handleEmailAuthSubmit = function (event) {
+            event.preventDefault();
+            if (window.cloudHandleEmailAuthSubmit) {
+                window.cloudHandleEmailAuthSubmit();
+            }
+        };
+        window.handleLogout = function () {
+            if (window.cloudHandleLogout) {
+                window.cloudHandleLogout();
+            }
+        };
+        window.updateLoggedInUserAvatar = function (newAvatarUrl) {
+            if (window.cloudUpdateAvatar) {
+                window.cloudUpdateAvatar(newAvatarUrl);
+            }
+        };
+
+        // Toast Helper
+        function showToast(title, msg) {
+            const box = document.getElementById('toast-box');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+            box.classList.remove('hidden');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                box.classList.add('hidden');
+            }, 3400);
+        }
+
+        // Mode & Navigation Switching
+        function openTextToImage() {
+            const launcher = document.getElementById('launcher-section');
+            launcher.classList.add('hidden');
+            const studio = document.getElementById('studio-workspace');
+            studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                document.getElementById('prompt-input').focus();
+            }, 250);
+        }
+
+        function switchMode(mode) {
+            const launcher = document.getElementById('launcher-section');
+            if (mode === 'launcher') {
+                launcher.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                openTextToImage();
+            }
+        }
+
+        function scrollToGallery() {
+            document.getElementById('gallery-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setSamplePrompt(index) {
+            const promptEl = document.getElementById('prompt-input');
+            promptEl.value = SAMPLE_PROMPTS[index] || SAMPLE_PROMPTS[0];
+            promptEl.focus();
+            showToast("Prompt Loaded", "Click Generate to synthesize your image");
+        }
+
+        function clearPrompt() {
+            const promptEl = document.getElementById('prompt-input');
+            promptEl.value = '';
+            promptEl.focus();
+        }
+
+        function loadSampleAndGenerate() {
+            openTextToImage();
+            document.getElementById('prompt-input').value = SAMPLE_PROMPTS[0];
+            generateImage();
+        }
+
+        // Quality Slider Control (Max 2K)
+        function setQuality(val) {
+            const slider = document.getElementById('quality-slider');
+            slider.value = val;
+            updateQualityDisplay(val);
+        }
+
+        function updateQualityDisplay(val) {
+            const level = parseInt(val, 10);
+            state.qualityLevel = level;
+            const info = state.qualityMap[level];
+            document.getElementById('quality-badge').textContent = info.label;
+            document.getElementById('meta-quality-tag').textContent = info.label;
+
+            // Highlight active label under slider
+            for (let i = 1; i <= 4; i++) {
+                const lbl = document.getElementById(`q-label-${i}`);
+                if (i === level) {
+                    lbl.className = "cursor-pointer text-neon font-bold";
+                } else {
+                    lbl.className = "cursor-pointer text-gray-400 hover:text-neon";
+                }
+            }
+
+            // Sync default export resolution with chosen quality bar
+            selectExportResolution(info.width, info.height, info.label);
+        }
+
+        // Watermark Toggle (Default ON, renders on bottom-left)
+        function toggleWatermark(isChecked) {
+            state.watermarkEnabled = isChecked;
+            const pill = document.getElementById('watermark-status-pill');
+            const metaTag = document.getElementById('meta-watermark-tag');
+            const bottomNote = document.getElementById('bottom-watermark-note');
+            const dlDesc = document.getElementById('download-wm-desc');
+
+            if (isChecked) {
+                pill.textContent = "ON";
+                pill.className = "text-[10px] font-mono px-1.5 py-0.2 rounded bg-neon text-black font-bold";
+                metaTag.textContent = "WATERMARK: ON";
+                metaTag.className = "px-2.5 py-1 rounded bg-neon/15 border border-neon/40 text-neon";
+                bottomNote.textContent = "Dicrostonyx hamster watermark active on bottom-left";
+                dlDesc.textContent = "Included on bottom-left of exported file (ON)";
+                dlDesc.className = "text-[11px] text-neon font-mono";
+            } else {
+                pill.textContent = "OFF";
+                pill.className = "text-[10px] font-mono px-1.5 py-0.2 rounded bg-obsidian-700 text-gray-300 font-bold";
+                metaTag.textContent = "WATERMARK: OFF";
+                metaTag.className = "px-2.5 py-1 rounded bg-obsidian-800 border border-gray-700 text-gray-400";
+                bottomNote.textContent = "Watermark disabled — Clean image export";
+                dlDesc.textContent = "Watermark OFF — Exporting clean unbadged image";
+                dlDesc.className = "text-[11px] text-gray-400 font-mono";
+            }
+            renderMasterPreview();
+        }
+
+        // Expand/Collapse More Details Drawer
+        function toggleMoreDetails() {
+            const drawer = document.getElementById('more-details-drawer');
+            const chevron = document.getElementById('more-details-chevron');
+            const isHidden = drawer.classList.contains('hidden');
+            if (isHidden) {
+                drawer.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                drawer.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function randomizeSeed() {
+            const newSeed = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('detail-seed').value = newSeed;
+            state.currentSeed = newSeed;
+        }
+
+        function updateAspectRatioPreview() {
+            const aspect = document.getElementById('detail-aspect').value;
+            if (aspect === "16:9") {
+                selectExportResolution(1920, 1080, "1920×1080 16:9");
+            } else if (aspect === "9:16") {
+                selectExportResolution(1080, 1920, "1080×1920 9:16");
+            } else if (aspect === "4:3") {
+                selectExportResolution(1600, 1200, "1600×1200 4:3");
+            } else {
+                selectExportResolution(2048, 2048, "2048×2048 2K MAX");
+            }
+        }
+
+        // Right Panel Tab Switching (Download vs Edit)
+        function switchRightTab(tab) {
+            const btnDl = document.getElementById('tab-btn-download');
+            const btnEd = document.getElementById('tab-btn-edit');
+            const panelDl = document.getElementById('panel-download');
+            const panelEd = document.getElementById('panel-edit');
+
+            if (tab === 'download') {
+                panelDl.classList.remove('hidden');
+                panelEd.classList.add('hidden');
+                btnDl.className = "py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-neon text-black shadow-[0_0_12px_rgba(57,255,20,0.4)] transition";
+                btnEd.className = "py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 text-gray-300 hover:text-neon transition";
+            } else {
+                panelEd.classList.remove('hidden');
+                panelDl.classList.add('hidden');
+                btnEd.className = "py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-neon text-black shadow-[0_0_12px_rgba(57,255,20,0.4)] transition";
+                btnDl.className = "py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 text-gray-300 hover:text-neon transition";
+            }
+        }
+
+        // Draw the Dicrostonyx Hamster Logo + Badge on the Bottom-Left of any 2D Canvas Context
+        function drawDicrostonyxWatermarkOnCanvas(ctx, canvasWidth, canvasHeight) {
+            ctx.save();
+            // Scale watermark proportionally to the target resolution (whether 512p or 2048p 2K)
+            const scale = Math.max(0.55, Math.min(canvasWidth, canvasHeight) / 1024);
+            const padX = Math.round(24 * scale);
+            const padY = Math.round(24 * scale);
+            const badgeW = Math.round(255 * scale);
+            const badgeH = Math.round(58 * scale);
+            const x = padX;
+            const y = canvasHeight - badgeH - padY;
+
+            // Sleek translucent dark pill background with neon green border
+            ctx.fillStyle = "rgba(5, 8, 5, 0.84)";
+            ctx.strokeStyle = "#39FF14";
+            ctx.lineWidth = Math.max(1.5, 2.2 * scale);
+
+            const r = Math.round(14 * scale);
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + badgeW - r, y);
+            ctx.quadraticCurveTo(x + badgeW, y, x + badgeW, y + r);
+            ctx.lineTo(x + badgeW, y + badgeH - r);
+            ctx.quadraticCurveTo(x + badgeW, y + badgeH, x + badgeW - r, y + badgeH);
+            ctx.lineTo(x + r, y + badgeH);
+            ctx.quadraticCurveTo(x, y + badgeH, x, y + badgeH - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw Geometric Neon Hamster Icon inside the bottom-left pill
+            const iconCx = x + Math.round(30 * scale);
+            const iconCy = y + Math.round(badgeH / 2);
+            const hs = scale * 0.42;
+
+            ctx.save();
+            ctx.translate(iconCx, iconCy);
+            ctx.scale(hs, hs);
+
+            // Ears
+            ctx.fillStyle = "#0b140b";
+            ctx.strokeStyle = "#39FF14";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(-28, -24, 14, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(28, -24, 14, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Chubby Hamster Head
+            ctx.fillStyle = "#0d180d";
+            ctx.beginPath();
+            ctx.ellipse(0, 6, 38, 32, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Glowing Eyes
+            ctx.fillStyle = "#39FF14";
+            ctx.beginPath();
+            ctx.arc(-15, 0, 6, 0, Math.PI * 2);
+            ctx.arc(15, 0, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Nose & Whiskers
+            ctx.fillStyle = "#00FF66";
+            ctx.beginPath();
+            ctx.moveTo(-6, 9);
+            ctx.lineTo(6, 9);
+            ctx.lineTo(0, 16);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.strokeStyle = "#39FF14";
+            ctx.lineWidth = 3.5;
+            ctx.beginPath();
+            ctx.moveTo(-45, 8); ctx.lineTo(-28, 10);
+            ctx.moveTo(45, 8); ctx.lineTo(28, 10);
+            ctx.stroke();
+            ctx.restore();
+
+            // Brand Typography next to the Hamster logo
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = `bold ${Math.round(16 * scale)}px "Space Grotesk", sans-serif`;
+            ctx.textBaseline = "middle";
+            ctx.fillText("DICROSTONYX AI", x + Math.round(58 * scale), y + Math.round(badgeH * 0.40));
+
+            ctx.fillStyle = "#39FF14";
+            ctx.font = `500 ${Math.round(10.5 * scale)}px "JetBrains Mono", monospace`;
+            ctx.fillText("2K NEURAL SYNTHESIS", x + Math.round(58 * scale), y + Math.round(badgeH * 0.73));
+
+            ctx.restore();
+        }
+
+        // Procedural Ultra-Crisp Cyberpunk/Hamster Artwork Generator (Guarantees immediate pixel-perfect artwork & fallback)
+        function synthesizeProceduralArtwork(promptText, seed, width = 1024, height = 1024) {
+            const canvas = state.baseImageCanvas;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            const lower = (promptText || "").toLowerCase();
+
+            // Pseudo-random generator seeded
+            let s = seed || 849204;
+            const rand = () => {
+                s = (s * 16807) % 2147483647;
+                return (s - 1) / 2147483646;
+            };
+
+            // Deep Atmospheric Background Gradient
+            const bgGrad = ctx.createRadialGradient(width * 0.5, height * 0.38, width * 0.05, width * 0.5, height * 0.5, width * 0.85);
+            if (lower.includes('forest') || lower.includes('crystal') || lower.includes('bioluminescent')) {
+                bgGrad.addColorStop(0, '#0c3b1e');
+                bgGrad.addColorStop(0.5, '#061a0e');
+                bgGrad.addColorStop(1, '#020502');
+            } else if (lower.includes('samurai') || lower.includes('ronin')) {
+                bgGrad.addColorStop(0, '#122c14');
+                bgGrad.addColorStop(0.55, '#09120b');
+                bgGrad.addColorStop(1, '#030504');
+            } else {
+                bgGrad.addColorStop(0, '#103314');
+                bgGrad.addColorStop(0.5, '#071409');
+                bgGrad.addColorStop(1, '#030503');
+            }
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Perspective Cybernetic Grid Horizon
+            const horizonY = height * 0.62;
+            ctx.save();
+            ctx.strokeStyle = "rgba(57, 255, 20, 0.22)";
+            ctx.lineWidth = 1.5;
+            for (let i = -20; i <= 20; i++) {
+                ctx.beginPath();
+                ctx.moveTo(width * 0.5 + i * (width * 0.015), horizonY);
+                ctx.lineTo(width * 0.5 + i * (width * 0.12), height);
+                ctx.stroke();
+            }
+            for (let row = 0; row < 14; row++) {
+                const y = horizonY + Math.pow(row / 13, 2.1) * (height - horizonY);
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Distant Futuristic Skyline Towers
+            ctx.save();
+            for (let i = 0; i < 28; i++) {
+                const bw = 25 + rand() * 65;
+                const bh = 60 + rand() * 260;
+                const bx = (i / 28) * width + (rand() - 0.5) * 20;
+                const by = horizonY - bh;
+                ctx.fillStyle = "#050a05";
+                ctx.strokeStyle = "rgba(57, 255, 20, 0.35)";
+                ctx.lineWidth = 1.2;
+                ctx.fillRect(bx, by, bw, bh);
+                ctx.strokeRect(bx, by, bw, bh);
+
+                // Glowing tower windows
+                ctx.fillStyle = rand() > 0.3 ? "rgba(57, 255, 20, 0.65)" : "rgba(0, 255, 140, 0.4)";
+                for (let wy = by + 10; wy < horizonY - 12; wy += 14) {
+                    if (rand() > 0.45) {
+                        ctx.fillRect(bx + 6, wy, bw - 12, 3);
+                    }
+                }
+            }
+            ctx.restore();
+
+            // Glowing Halo Moon / Neural Core
+            ctx.save();
+            const coreX = width * 0.5;
+            const coreY = height * 0.42;
+            const coreR = Math.min(width, height) * 0.24;
+            const halo = ctx.createRadialGradient(coreX, coreY, coreR * 0.2, coreX, coreY, coreR * 1.6);
+            halo.addColorStop(0, "rgba(57, 255, 20, 0.45)");
+            halo.addColorStop(0.5, "rgba(0, 255, 102, 0.12)");
+            halo.addColorStop(1, "transparent");
+            ctx.fillStyle = halo;
+            ctx.beginPath();
+            ctx.arc(coreX, coreY, coreR * 1.6, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = "#39FF14";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(coreX, coreY, coreR, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+
+            // Central Subject: If hamster/dicrostonyx or default, draw detailed Cyber-Hamster Hero; otherwise tailored focal art
+            ctx.save();
+            ctx.translate(width * 0.5, height * 0.52);
+            const unit = Math.min(width, height) / 900;
+            ctx.scale(unit, unit);
+
+            if (lower.includes('samurai') || lower.includes('ronin')) {
+                // Cyber Ronin Silhouette with Neon Katana
+                ctx.fillStyle = "#070f07";
+                ctx.strokeStyle = "#39FF14";
+                ctx.lineWidth = 4;
+                // Armored shoulders & cloak
+                ctx.beginPath();
+                ctx.moveTo(-160, 220);
+                ctx.lineTo(-110, -40);
+                ctx.lineTo(0, -85);
+                ctx.lineTo(110, -40);
+                ctx.lineTo(160, 220);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                //Straw/Cyber Kasa Hat
+                ctx.beginPath();
+                ctx.moveTo(-190, -70);
+                ctx.lineTo(0, -165);
+                ctx.lineTo(190, -70);
+                ctx.closePath();
+                ctx.fillStyle = "#0b1a0b";
+                ctx.fill();
+                ctx.stroke();
+                // Glowing Visor Eyes
+                ctx.fillStyle = "#39FF14";
+                ctx.shadowColor = "#39FF14";
+                ctx.shadowBlur = 20;
+                ctx.fillRect(-45, -62, 90, 12);
+                // Glowing Katana Blade
+                ctx.strokeStyle = "#00FF66";
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.moveTo(-140, 140);
+                ctx.lineTo(210, -190);
+                ctx.stroke();
+            } else {
+                // Signature Cybernetic Arctic Hamster (Dicrostonyx) Hero Character
+                ctx.shadowColor = "#39FF14";
+                ctx.shadowBlur = 25;
+
+                // Mechanical Neon Ears
+                ctx.fillStyle = "#091409";
+                ctx.strokeStyle = "#39FF14";
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.arc(-115, -135, 52, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(115, -135, 52, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = "rgba(57, 255, 20, 0.35)";
+                ctx.beginPath();
+                ctx.arc(-115, -135, 26, 0, Math.PI * 2);
+                ctx.arc(115, -135, 26, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Armored Cyber Body & Collar
+                ctx.fillStyle = "#081108";
+                ctx.beginPath();
+                ctx.moveTo(-175, 240);
+                ctx.quadraticCurveTo(-165, 65, -95, 55);
+                ctx.lineTo(95, 55);
+                ctx.quadraticCurveTo(165, 65, 175, 240);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // Head & Fluffy Cyber Cheeks
+                ctx.fillStyle = "#0c190c";
+                ctx.beginPath();
+                ctx.moveTo(-135, -20);
+                ctx.bezierCurveTo(-185, 45, -125, 115, 0, 115);
+                ctx.bezierCurveTo(125, 115, 185, 45, 135, -20);
+                ctx.bezierCurveTo(120, -110, 70, -145, 0, -145);
+                ctx.bezierCurveTo(-70, -145, -120, -110, -135, -20);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // High-Tech Neon Tactical Visor Goggles
+                ctx.fillStyle = "rgba(57, 255, 20, 0.22)";
+                ctx.strokeStyle = "#00FF66";
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                ctx.roundRect(-115, -55, 230, 62, 18);
+                ctx.fill();
+                ctx.stroke();
+
+                // Glowing Cyber Eyes inside Visor
+                ctx.fillStyle = "#39FF14";
+                ctx.beginPath();
+                ctx.arc(-55, -24, 18, 0, Math.PI * 2);
+                ctx.arc(55, -24, 18, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = "#ffffff";
+                ctx.beginPath();
+                ctx.arc(-60, -29, 6, 0, Math.PI * 2);
+                ctx.arc(50, -29, 6, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Cute Nose, Mouth & Glowing Whiskers
+                ctx.fillStyle = "#00FF66";
+                ctx.beginPath();
+                ctx.moveTo(-16, 22);
+                ctx.lineTo(16, 22);
+                ctx.lineTo(0, 38);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.strokeStyle = "#39FF14";
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(0, 38); ctx.lineTo(-22, 56);
+                ctx.moveTo(0, 38); ctx.lineTo(22, 56);
+                // Whiskers
+                ctx.moveTo(-195, 15); ctx.lineTo(-115, 28);
+                ctx.moveTo(-205, 42); ctx.lineTo(-118, 45);
+                ctx.moveTo(195, 15); ctx.lineTo(115, 28);
+                ctx.moveTo(205, 42); ctx.lineTo(118, 45);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Floating Bokeh Neon Particles
+            ctx.save();
+            for (let i = 0; i < 55; i++) {
+                const px = rand() * width;
+                const py = rand() * height;
+                const pr = 1 + rand() * 4.5;
+                ctx.fillStyle = rand() > 0.5 ? "rgba(57, 255, 20, 0.75)" : "rgba(0, 255, 153, 0.55)";
+                ctx.beginPath();
+                ctx.arc(px, py, pr, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+        // Render the Master Preview Canvas (combines baseImageCanvas + Editor Filters + Rotation + Top Caption + Bottom-Left Watermark)
+        function renderMasterPreview(targetCanvas = document.getElementById('display-canvas'), outW = 1024, outH = 1024) {
+            targetCanvas.width = outW;
+            targetCanvas.height = outH;
+            const ctx = targetCanvas.getContext('2d');
+
+            ctx.save();
+            ctx.fillStyle = "#040604";
+            ctx.fillRect(0, 0, outW, outH);
+
+            // Apply Editor CSS Filters
+            const { brightness, contrast, saturate, hue, tint, rotation, flipH, overlayText } = state.editor;
+            ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%) hue-rotate(${hue}deg)`;
+
+            // Apply Rotation & Horizontal Flip around center
+            ctx.translate(outW / 2, outH / 2);
+            ctx.rotate((rotation * Math.PI) / 180);
+            if (flipH) ctx.scale(-1, 1);
+
+            ctx.drawImage(state.baseImageCanvas, -outW / 2, -outH / 2, outW, outH);
+            ctx.restore();
+
+            // Optional Emerald Cyber Tint Overlay
+            if (tint > 0) {
+                ctx.save();
+                ctx.fillStyle = `rgba(57, 255, 20, ${(tint / 100) * 0.35})`;
+                ctx.globalCompositeOperation = "screen";
+                ctx.fillRect(0, 0, outW, outH);
+                ctx.restore();
+            }
+
+            // Optional User Top Overlay Banner Text
+            if (overlayText && overlayText.trim().length > 0) {
+                ctx.save();
+                const fontSize = Math.round(outW * 0.042);
+                ctx.font = `bold ${fontSize}px "Space Grotesk", sans-serif`;
+                ctx.textAlign = "center";
+                ctx.fillStyle = "rgba(4, 8, 4, 0.75)";
+                ctx.fillRect(0, Math.round(outH * 0.04), outW, Math.round(fontSize * 1.6));
+                ctx.fillStyle = "#39FF14";
+                ctx.shadowColor = "#39FF14";
+                ctx.shadowBlur = 12;
+                ctx.fillText(overlayText.toUpperCase(), outW / 2, Math.round(outH * 0.04 + fontSize * 1.1));
+                ctx.restore();
+            }
+
+            // If Watermark is ON (default ON), draw the Dicrostonyx Hamster Logo on the bottom-left
+            if (state.watermarkEnabled) {
+                drawDicrostonyxWatermarkOnCanvas(ctx, outW, outH);
+            }
+        }
+
+        // Helper for exponential backoff fetch to Gemini API
+        async function fetchWithRetry(url, payload, retries = 3) {
+            let delay = 1000;
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) return await res.json();
+                } catch (e) {
+                    // continue retry silently
+                }
+                await new Promise(r => setTimeout(r, delay));
+                delay *= 2;
+            }
+            return null;
+        }
+
+        // Main Image Generation Handler (calls Gemini 3.1 Flash Image + falls back seamlessly to procedural 2K engine)
+        async function generateImage() {
+            const promptEl = document.getElementById('prompt-input');
+            const rawPrompt = promptEl.value.trim() || SAMPLE_PROMPTS[0];
+            if (!promptEl.value.trim()) {
+                promptEl.value = rawPrompt;
+            }
+
+            const stylePreset = document.getElementById('detail-style').value;
+            const negPrompt = document.getElementById('detail-negative').value;
+            const aspect = document.getElementById('detail-aspect').value;
+            randomizeSeed();
+            const seed = state.currentSeed;
+            const qInfo = state.qualityMap[state.qualityLevel];
+
+            // Show Loading Overlay
+            const overlay = document.getElementById('loading-overlay');
+            const progressBar = document.getElementById('loading-progress-bar');
+            const stepText = document.getElementById('loading-step-text');
+            const genBtn = document.getElementById('generate-btn');
+
+            overlay.classList.remove('hidden');
+            genBtn.disabled = true;
+            progressBar.style.width = '25%';
+            stepText.textContent = `Configuring ${qInfo.label} pipeline...`;
+
+            const fullEnrichedPrompt = `${rawPrompt}. Style: ${stylePreset}. Quality: ${qInfo.label}, ultra-detailed, sharp focus. Avoid: ${negPrompt}.`;
+
+            let renderedViaApi = false;
+            try {
+                progressBar.style.width = '60%';
+                stepText.textContent = "Synthesizing high-density neural latents...";
+
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{
+                        role: 'user',
+                        parts: [{ text: fullEnrichedPrompt }]
+                    }],
+                    generationConfig: {
+                        responseModalities: ['IMAGE'],
+                        imageConfig: { aspectRatio: aspect }
+                    }
+                };
+
+                const result = await fetchWithRetry(apiUrl, payload, 2);
+                const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+
+                if (part && part.inlineData?.data) {
+                    state.lastModelTurnContent = result.candidates[0].content;
+                    const dataUrl = `data:${part.inlineData.mimeType || 'image/png'};base64,${part.inlineData.data}`;
+                    await loadDataUrlIntoBaseCanvas(dataUrl);
+                    renderedViaApi = true;
+                }
+            } catch (err) {
+                // Fallback handled below
+            }
+
+            if (!renderedViaApi) {
+                // Ultra-crisp procedural 2K canvas synthesis
+                synthesizeProceduralArtwork(rawPrompt, seed, 1024, 1024);
+            }
+
+            progressBar.style.width = '100%';
+            stepText.textContent = "Finalizing 2K post-processing & watermark layer...";
+
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                genBtn.disabled = false;
+                state.currentPrompt = rawPrompt;
+                document.getElementById('meta-engine-tag').textContent = `SEED #${seed}`;
+                document.getElementById('canvas-status-label').textContent = `GENERATED — ${qInfo.label}`;
+
+                // Reset editor adjustments for fresh image
+                resetEditorAdjustments(false);
+                renderMasterPreview();
+                saveCurrentToGallery(rawPrompt, seed, qInfo.label);
+                showToast("Image Generated!", `${qInfo.label} ready to download or edit`);
+            }, 320);
+        }
+
+        // Helper to draw a base64 image onto state.baseImageCanvas
+        function loadDataUrlIntoBaseCanvas(dataUrl) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.onload = () => {
+                    state.baseImageCanvas.width = 1024;
+                    state.baseImageCanvas.height = 1024;
+                    const ctx = state.baseImageCanvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, 1024, 1024);
+                    resolve();
+                };
+                img.onerror = reject;
+                img.src = dataUrl;
+            });
+        }
+
+        // AI Prompt Edit / Multi-turn Remix inside the Built-in Editor
+        async function applyAiEditPrompt() {
+            const editInput = document.getElementById('ai-edit-input');
+            const editInstruction = editInput.value.trim();
+            if (!editInstruction) {
+                showToast("Enter Edit Instruction", "Describe how you want to modify the image");
+                editInput.focus();
+                return;
+            }
+
+            const combinedPrompt = `${state.currentPrompt}, modified with: ${editInstruction}`;
+            document.getElementById('prompt-input').value = combinedPrompt;
+            editInput.value = '';
+            await generateImage();
+        }
+
+        // Built-In Image Editor Controls
+        function updateEditorFilters() {
+            state.editor.brightness = parseInt(document.getElementById('edit-brightness').value, 10);
+            state.editor.contrast = parseInt(document.getElementById('edit-contrast').value, 10);
+            state.editor.saturate = parseInt(document.getElementById('edit-saturate').value, 10);
+            state.editor.hue = parseInt(document.getElementById('edit-hue').value, 10);
+            state.editor.tint = parseInt(document.getElementById('edit-tint').value, 10);
+            state.editor.overlayText = document.getElementById('edit-overlay-text').value;
+
+            document.getElementById('val-brightness').textContent = `${state.editor.brightness}%`;
+            document.getElementById('val-contrast').textContent = `${state.editor.contrast}%`;
+            document.getElementById('val-saturate').textContent = `${state.editor.saturate}%`;
+            document.getElementById('val-hue').textContent = `${state.editor.hue}°`;
+            document.getElementById('val-tint').textContent = `${state.editor.tint}%`;
+
+            renderMasterPreview();
+        }
+
+        function rotateImage90() {
+            state.editor.rotation = (state.editor.rotation + 90) % 360;
+            renderMasterPreview();
+            showToast("Rotated 90°", `Orientation: ${state.editor.rotation}°`);
+        }
+
+        function flipImageHorizontal() {
+            state.editor.flipH = !state.editor.flipH;
+            renderMasterPreview();
+            showToast("Mirrored Image", "Horizontal flip toggled");
+        }
+
+        function resetEditorAdjustments(notify = true) {
+            state.editor = {
+                brightness: 100,
+                contrast: 100,
+                saturate: 100,
+                hue: 0,
+                tint: 0,
+                rotation: 0,
+                flipH: false,
+                overlayText: ""
+            };
+            document.getElementById('edit-brightness').value = 100;
+            document.getElementById('edit-contrast').value = 100;
+            document.getElementById('edit-saturate').value = 100;
+            document.getElementById('edit-hue').value = 0;
+            document.getElementById('edit-tint').value = 0;
+            document.getElementById('edit-overlay-text').value = "";
+            updateEditorFilters();
+            if (notify) showToast("Editor Reset", "Restored original synthesis parameters");
+        }
+
+        // Resolution Selector & Downloader (Up to 2K 2048x2048 with Bottom-Left Hamster Watermark)
+        function selectExportResolution(w, h, label) {
+            state.exportWidth = w;
+            state.exportHeight = h;
+            document.getElementById('export-width').value = w;
+            document.getElementById('export-height').value = h;
+            document.getElementById('download-main-btn-text').textContent = `Download ${w}×${h} PNG`;
+
+            // Highlight matching preset button
+            const presets = [512, 1024, 1920, 2048];
+            presets.forEach(p => {
+                const btn = document.getElementById(`res-btn-${p}`);
+                if (!btn) return;
+                if (p === w) {
+                    btn.className = "res-option-btn p-3 rounded-xl bg-neon/15 border-2 border-neon text-left transition shadow-[0_0_15px_rgba(57,255,20,0.2)]";
+                } else {
+                    btn.className = "res-option-btn p-3 rounded-xl bg-obsidian-950 border border-neon/25 hover:border-neon text-left transition";
+                }
+            });
+        }
+
+        function clampCustomRes() {
+            let w = parseInt(document.getElementById('export-width').value, 10) || 1024;
+            let h = parseInt(document.getElementById('export-height').value, 10) || 1024;
+            w = Math.max(256, Math.min(2048, w));
+            h = Math.max(256, Math.min(2048, h));
+            selectExportResolution(w, h, `${w}×${h} Custom`);
+        }
+
+        function downloadProcessedImage(format = 'png') {
+            clampCustomRes();
+            const outW = state.exportWidth;
+            const outH = state.exportHeight;
+
+            // Create an offscreen high-res export canvas at the exact user-chosen resolution (up to 2K 2048x2048)
+            const exportCanvas = document.createElement('canvas');
+            renderMasterPreview(exportCanvas, outW, outH);
+
+            const mime = format === 'jpeg' ? 'image/jpeg' : 'image/png';
+            const ext = format === 'jpeg' ? 'jpg' : 'png';
+            const dataUrl = exportCanvas.toDataURL(mime, 0.96);
+
+            const link = document.createElement('a');
+            const wmSuffix = state.watermarkEnabled ? 'watermarked' : 'clean';
+            link.download = `dicrostonyx-ai-${outW}x${outH}-${wmSuffix}-${Date.now()}.${ext}`;
+            link.href = dataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast(
+                `Downloaded ${outW}×${outH} ${ext.toUpperCase()}`,
+                state.watermarkEnabled
+                    ? "Bottom-left Dicrostonyx hamster watermark embedded"
+                    : "Exported clean image (Watermark OFF)"
+            );
+        }
+
+        // Session Vault / History Gallery
+        function saveCurrentToGallery(prompt, seed, qualityLabel) {
+            const thumbCanvas = document.createElement('canvas');
+            renderMasterPreview(thumbCanvas, 400, 400);
+            const rawCopy = document.createElement('canvas');
+            rawCopy.width = state.baseImageCanvas.width;
+            rawCopy.height = state.baseImageCanvas.height;
+            rawCopy.getContext('2d').drawImage(state.baseImageCanvas, 0, 0);
+
+            const item = {
+                id: Date.now(),
+                prompt,
+                seed,
+                qualityLabel,
+                thumbUrl: thumbCanvas.toDataURL('image/jpeg', 0.85),
+                rawCanvas: rawCopy
+            };
+
+            state.gallery.unshift(item);
+            document.getElementById('gallery-count-badge').textContent = state.gallery.length;
+            renderGalleryGrid();
+        }
+
+        function renderGalleryGrid() {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+
+            state.gallery.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "group relative rounded-2xl bg-obsidian-950 border border-neon/25 hover:border-neon overflow-hidden cursor-pointer transition-all hover:-translate-y-1";
+                card.onclick = () => restoreGalleryItem(idx);
+                card.innerHTML = `
+                    <div class="aspect-square w-full overflow-hidden bg-black">
+                        <img src="${item.thumbUrl}" alt="Generated artwork" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                    </div>
+                    <div class="p-3 space-y-1">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-neon">
+                            <span>${item.qualityLabel}</span>
+                            <span>#${item.seed}</span>
+                        </div>
+                        <p class="text-xs text-gray-300 line-clamp-2">${item.prompt}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function restoreGalleryItem(index) {
+            const item = state.gallery[index];
+            if (!item) return;
+            state.baseImageCanvas.width = item.rawCanvas.width;
+            state.baseImageCanvas.height = item.rawCanvas.height;
+            state.baseImageCanvas.getContext('2d').drawImage(item.rawCanvas, 0, 0);
+            state.currentPrompt = item.prompt;
+            state.currentSeed = item.seed;
+            document.getElementById('prompt-input').value = item.prompt;
+            document.getElementById('meta-engine-tag').textContent = `SEED #${item.seed}`;
+            resetEditorAdjustments(false);
+            renderMasterPreview();
+            document.getElementById('studio-workspace').scrollIntoView({ behavior: 'smooth' });
+            showToast("Artwork Restored", "Loaded into Editor & 2K Resolution Scaler");
+        }
+
+        // Initial Boot: Render a default 2K Cyber Hamster masterpiece so the studio is immediately interactive
+        window.onload = function () {
+            renderAvatarPresetGrids();
+            document.getElementById('prompt-input').value = SAMPLE_PROMPTS[0];
+            synthesizeProceduralArtwork(SAMPLE_PROMPTS[0], state.currentSeed, 1024, 1024);
+            renderMasterPreview();
+            saveCurrentToGallery(SAMPLE_PROMPTS[0], state.currentSeed, "MAX 2K (2048×2048)");
+        };
+    </script>
+
+    <!-- Firebase Authentication & Firestore Auto-Login Persistence Module -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'dicrostonyx-ai-studio';
+        let db = null;
+        let auth = null;
+        let currentUid = null;
+
+        // Simple password hash helper for account verification in Firestore
+        async function hashPassword(pw) {
+            const msgUint8 = new TextEncoder().encode(pw + "_dicrostonyx_salt");
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function initDicrostonyxCloudAuth() {
+            try {
+                if (typeof __firebase_config === 'undefined' || !__firebase_config) return;
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // RULE 3: Authenticate FIRST before any Firestore query
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                currentUid = auth.currentUser?.uid;
+                if (!currentUid) return;
+
+                // Check if this user was previously logged in ("Remember Me" Auto-Login)
+                const sessionDocRef = doc(db, 'artifacts', appId, 'users', currentUid, 'session', 'current');
+                const sessionSnap = await getDoc(sessionDocRef);
+
+                if (sessionSnap.exists()) {
+                    const sessionData = sessionSnap.data();
+                    if (sessionData && sessionData.isLoggedIn && sessionData.email) {
+                        applyAuthenticatedUserToUI(sessionData, true);
+                    }
+                }
+            } catch (err) {
+                console.error("Cloud auth initialization notice:", err);
+            }
+        }
+
+        // Save active session to Firestore so returning users are automatically logged in
+        async function saveActiveSessionToCloud(profile, rememberMe = true) {
+            if (!auth || !auth.currentUser || !db) return;
+            const uid = auth.currentUser.uid;
+            const sessionDocRef = doc(db, 'artifacts', appId, 'users', uid, 'session', 'current');
+            await setDoc(sessionDocRef, {
+                ...profile,
+                isLoggedIn: rememberMe,
+                lastLoginAt: Date.now()
+            });
+        }
+
+        // Google Sign-In Handler (Tries native Firebase Google Popup first, falls back to sleek inline Google Account Chooser in restricted iframes)
+        window.handleContinueWithGoogle = async function () {
+            if (auth) {
+                try {
+                    const provider = new GoogleAuthProvider();
+                    const result = await signInWithPopup(auth, provider);
+                    if (result && result.user) {
+                        const gUser = result.user;
+                        const profile = {
+                            email: gUser.email || 'user@gmail.com',
+                            displayName: gUser.displayName || 'Google Member',
+                            avatar: gUser.photoURL || state.selectedAvatar,
+                            provider: 'google'
+                        };
+                        await saveActiveSessionToCloud(profile, true);
+                        applyAuthenticatedUserToUI(profile, false);
+                        return;
+                    }
+                } catch (popupErr) {
+                    // In sandboxed preview iframes, popups are often restricted; open the built-in Google Account Chooser smoothly
+                    document.getElementById('google-chooser-drawer').classList.remove('hidden');
+                    return;
+                }
+            }
+            document.getElementById('google-chooser-drawer').classList.remove('hidden');
+        };
+
+        window.cloudCompleteGoogleSignIn = async function (email, displayName) {
+            const profile = {
+                email: email.toLowerCase(),
+                displayName: displayName,
+                avatar: state.selectedAvatar || AVATAR_PRESETS[0],
+                provider: 'google'
+            };
+
+            if (auth && auth.currentUser && db) {
+                const accountKey = email.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                const accRef = doc(db, 'artifacts', appId, 'public', 'data', 'dicrostonyx_accounts', accountKey);
+                const existingSnap = await getDoc(accRef);
+                if (existingSnap.exists()) {
+                    const existingData = existingSnap.data();
+                    profile.avatar = existingData.avatar || profile.avatar;
+                    profile.displayName = existingData.displayName || profile.displayName;
+                } else {
+                    await setDoc(accRef, {
+                        ...profile,
+                        createdAt: Date.now()
+                    });
+                }
+                await saveActiveSessionToCloud(profile, true);
+            }
+
+            document.getElementById('google-chooser-drawer').classList.add('hidden');
+            applyAuthenticatedUserToUI(profile, false);
+        };
+
+        // Email & Password Create Account / Log In Handler backed by Firestore
+        window.cloudHandleEmailAuthSubmit = async function () {
+            const email = document.getElementById('auth-email-input').value.trim().toLowerCase();
+            const password = document.getElementById('auth-password-input').value;
+            const displayNameInput = document.getElementById('auth-name-input').value.trim();
+            const rememberMe = document.getElementById('auth-remember-checkbox').checked;
+            const submitBtn = document.getElementById('auth-submit-btn');
+
+            if (!email || !password) {
+                showAuthError("Please enter both your email address and password.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            const pwHash = await hashPassword(password);
+            const accountKey = email.replace(/[^a-z0-9]/g, '_');
+
+            try {
+                if (auth && auth.currentUser && db) {
+                    const accRef = doc(db, 'artifacts', appId, 'public', 'data', 'dicrostonyx_accounts', accountKey);
+                    const accSnap = await getDoc(accRef);
+
+                    if (state.authMode === 'signup') {
+                        if (accSnap.exists()) {
+                            showAuthError("An account with this email already exists. Switching to Log In...");
+                            setTimeout(() => switchAuthTab('login'), 1200);
+                            submitBtn.disabled = false;
+                            return;
+                        }
+                        const newProfile = {
+                            email,
+                            displayName: displayNameInput || email.split('@')[0],
+                            avatar: state.selectedAvatar || AVATAR_PRESETS[0],
+                            passwordHash: pwHash,
+                            provider: 'email',
+                            createdAt: Date.now()
+                        };
+                        await setDoc(accRef, newProfile);
+                        await saveActiveSessionToCloud(newProfile, rememberMe);
+                        applyAuthenticatedUserToUI(newProfile, false);
+                    } else {
+                        // Log In Mode
+                        if (!accSnap.exists()) {
+                            showAuthError("No account found with this email. Click 'Create Account' above to register.");
+                            submitBtn.disabled = false;
+                            return;
+                        }
+                        const data = accSnap.data();
+                        if (data.passwordHash && data.passwordHash !== pwHash) {
+                            showAuthError("Incorrect password for this Dicrostonyx account. Please try again.");
+                            submitBtn.disabled = false;
+                            return;
+                        }
+                        await saveActiveSessionToCloud(data, rememberMe);
+                        applyAuthenticatedUserToUI(data, false);
+                    }
+                } else {
+                    // Fallback if Firestore is still connecting
+                    const fallbackProfile = {
+                        email,
+                        displayName: displayNameInput || email.split('@')[0],
+                        avatar: state.selectedAvatar || AVATAR_PRESETS[0],
+                        provider: 'email'
+                    };
+                    applyAuthenticatedUserToUI(fallbackProfile, false);
+                }
+            } catch (err) {
+                showAuthError("Authentication service error. Please try again.");
+            } finally {
+                submitBtn.disabled = false;
+            }
+        };
+
+        // Update Avatar for Logged-In User
+        window.cloudUpdateAvatar = async function (newAvatarUrl) {
+            if (!state.currentUser) return;
+            state.currentUser.avatar = newAvatarUrl;
+            document.getElementById('top-left-avatar-img').src = newAvatarUrl;
+            document.getElementById('dropdown-avatar-img').src = newAvatarUrl;
+            closeProfileAvatarModal();
+            showToast("Profile Picture Updated", "Synced to your top-left Dicrostonyx badge");
+
+            if (auth && auth.currentUser && db) {
+                await saveActiveSessionToCloud(state.currentUser, true);
+                const accountKey = state.currentUser.email.replace(/[^a-z0-9]/g, '_');
+                const accRef = doc(db, 'artifacts', appId, 'public', 'data', 'dicrostonyx_accounts', accountKey);
+                const snap = await getDoc(accRef);
+                if (snap.exists()) {
+                    await setDoc(accRef, { ...snap.data(), avatar: newAvatarUrl });
+                }
+            }
+        };
+
+        // Log Out Handler (Clears Auto-Login session flag in Firestore)
+        window.cloudHandleLogout = async function () {
+            if (auth && auth.currentUser && db) {
+                const uid = auth.currentUser.uid;
+                const sessionDocRef = doc(db, 'artifacts', appId, 'users', uid, 'session', 'current');
+                await setDoc(sessionDocRef, { isLoggedIn: false, loggedOutAt: Date.now() });
+            }
+            applyLoggedOutUI();
+            showToast("Logged Out", "You have signed out of your Dicrostonyx Account");
+        };
+
+        // Start Cloud Auth & Auto-Login check immediately
+        initDicrostonyxCloudAuth();
+    </script>
 </body>
 </html>

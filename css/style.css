@@ -1,139 +1,88 @@
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
-    --background: #f5f7fa;
-    --surface: #ffffff;
-    --primary: #2563eb;
-    --text: #1e293b;
-    --secondary-text: #64748b;
-    --border: #e2e8f0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+--neon: #39FF14;
+--neon-soft: #00FF66;
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    background: var(--background);
-    color: var(--text);
-    line-height: 1.6;
+background-color: #040604;
+color: #e4fce4;
+background-image:
+radial-gradient(circle at 50% 0%, rgba(57, 255, 20, 0.08) 0%, transparent 55%),
+linear-gradient(rgba(57, 255, 20, 0.025) 1px, transparent 1px),
+linear-gradient(90deg, rgba(57, 255, 20, 0.025) 1px, transparent 1px);
+background-size: 100% 100%, 36px 36px, 36px 36px;
+overflow-x: hidden;
 }
 
-header {
-    max-width: 900px;
-    margin: 80px auto 60px;
-    padding: 0 24px;
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
 }
 
-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 16px;
+::-webkit-scrollbar-track {
+background: #060906;
 }
 
-header p {
-    font-size: 1.15rem;
-    color: var(--secondary-text);
-    max-width: 650px;
-    margin-bottom: 32px;
+::-webkit-scrollbar-thumb {
+background: #1a291a;
+border-radius: 4px;
+border: 1px solid rgba(57, 255, 20, 0.3);
 }
 
-button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 26px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
+::-webkit-scrollbar-thumb:hover {
+background: #39FF14;
 }
 
-main {
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 24px 80px;
+input[type="range"].neon-slider {
+-webkit-appearance: none;
+appearance: none;
+background: #121a12;
+height: 8px;
+border-radius: 999px;
+border: 1px solid rgba(57, 255, 20, 0.3);
+outline: none;
 }
 
-section {
-    margin-bottom: 70px;
+input[type="range"].neon-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #39FF14;
+cursor: pointer;
+box-shadow: 0 0 12px #39FF14, 0 0 4px #ffffff;
+border: 2px solid #040604;
+transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+input[type="range"].neon-slider::-webkit-slider-thumb:hover {
+transform: scale(1.18);
+box-shadow: 0 0 18px #39FF14, 0 0 8px #ffffff;
 }
 
-section p {
-    color: var(--secondary-text);
-    margin-bottom: 14px;
+.neon-border {
+border: 1px solid rgba(57, 255, 20, 0.28);
+box-shadow: 0 0 20px rgba(57, 255, 20, 0.05), inset 0 0 20px rgba(57, 255, 20, 0.02);
 }
 
-#features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+.neon-border-strong {
+border: 1px solid rgba(57, 255, 20, 0.65);
+box-shadow: 0 0 25px rgba(57, 255, 20, 0.18), inset 0 0 12px rgba(57, 255, 20, 0.06);
 }
 
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
+.neon-btn {
+background: linear-gradient(135deg, #39FF14 0%, #00e64d 100%);
+color: #030803;
+box-shadow: 0 0 20px rgba(57, 255, 20, 0.45);
+transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card h3 {
-    margin-bottom: 12px;
-    font-size: 1.2rem;
+.neon-btn:hover:not(:disabled) {
+box-shadow: 0 0 32px rgba(57, 255, 20, 0.8), 0 0 8px #ffffff;
+transform: translateY(-1px);
 }
 
-.card p {
-    margin: 0;
-}
-
-footer {
-    text-align: center;
-    padding: 40px 24px;
-    border-top: 1px solid var(--border);
-    color: var(--secondary-text);
-    font-size: 0.95rem;
-    background: var(--surface);
-}
-
-@media (max-width: 768px) {
-
-    header {
-        margin-top: 60px;
-    }
-
-    header h1 {
-        font-size: 2.3rem;
-    }
-
-    section h2 {
-        font-size: 1.7rem;
-    }
-
-}
-
-
-.button {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
-    padding: 14px 26px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-.button-group {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 24px;
+.neon-text-glow {
+text-shadow: 0 0 14px rgba(57, 255, 20, 0.55);
 }
